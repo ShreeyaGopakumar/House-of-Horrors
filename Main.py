@@ -1,13 +1,15 @@
 from cmu_graphics import *
 from PIL import Image
 import os, pathlib
-import door1
+import doors
 def drawSidePanel(app):
     if app.sidePanel:
         drawRect(0,0,150,app.height,fill='black',border="white")
         drawRect(150,app.height//2,25,100,align='center',fill='white')
+        crossed_distance=0
         for x in range(len(app.clues)):
-            drawImage(app.clues[x],150//2,20,width=50,height=80)
+            drawImage(app.clues[x],150/2-20,crossed_distance+20,width=60,height=100)
+            crossed_distance+=125
         crossed_distance=0
         for x in range(len(app.clues_tofind)):
             drawImage(app.clues_tofind[x],150/2-20,crossed_distance+20,width=60,height=100,opacity=50)
@@ -19,6 +21,11 @@ def sidePanelClick(app,mouseX,mouseY):
     if app.sidePanel:
         if 150-25/2<=mouseX<=150+25/2 and app.height//2-50<=mouseY<=app.height//2+50:
             app.sidePanel=False
+def drawOptions(app):
+    drawCircle(40,40,30,fill='black')
+    drawLabel("CLUES",40,40,fill='white',font='monospace')
+    drawCircle(40,110,30,fill='black')
+    drawLabel("MAP",40,110,fill='white',font='monospace')
     
 def onAppStart(app):
     app.sidePanel=False
@@ -87,51 +94,55 @@ def inArrow(app,mouseX,mouseY):
     return False
 def introScreen_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
+        app.callingForMap="door1"
         setActiveScreen('map')
 #________________________________________________
 def map_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')
     drawImage(app.map,app.width//2,app.height//2,width=1000,height=500,align='center')
-    drawRect(app.width//2,app.height//2+300,200,50,fill='black',border='white',align='center')
     drawImage(app.clown,app.width//2-270,app.height//2-100,width=75,height=100,align='center')
     drawImage(app.candles,app.width//2-400,app.height//2-100,width=75,height=100,align='center')
-    if app.clues==[]:
-        drawLabel("I'm READY!",app.width//2,app.height//2+300,fill="white",font="monospace",size=25)
+    drawCircle(app.width-50,50,30,fill='white')
+    drawLabel(">",app.width-50,50,fill='black',bold=True,size=60)
 
 def map_onMousePress(app,mouseX,mouseY):
-    if app.width//2-100<=mouseX<=app.width//2+100 and app.height//2+150<=mouseY<=app.height//2+450:
-        setActiveScreen('door1')
+    if distance(mouseX,mouseY,app.width-50,50)<=30:
+        setActiveScreen(app.callingForMap)
 #__________________________________________________
 
 def door1_onAppStart(app):
-    door1.features(app)
+    doors.features(app)
     
 def door1_redrawAll(app):
-    door1.redrawAll(app)
-    drawCircle(40,40,30,fill='black')
-    drawLabel("CLUES",40,40,30,fill='white',font='monospace')
+    doors.redrawAll(app)
+    drawOptions(app)
     drawSidePanel(app)
-    if app.foundCandle:
-        nextArrow = chr(0x21e8)
-        drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
-
+    
 def door1_onMousePress(app,mouseX,mouseY):
-    door1.click(mouseX,mouseY)
+    doors.click(mouseX,mouseY)
     sidePanelClick(app,mouseX,mouseY)
+    if distance(mouseX,mouseY,40,110)<=30:
+        app.callingForMap="door1"
+        setActiveScreen("map")
     if app.flag==3:
         setActiveScreen("room1_intro")
+    
 #_______________________________________________
 def room1_intro_redrawAll(app):
+    
     drawRect(0,0,app.width,app.height,fill="grey")
     drawLabel("INTRO TO MINI-GAME 1",app.width//2,app.height//2,font='monospace',size=60)
     drawLabel("START!",app.width//2,app.height//2+125,fill="white",font="monospace",size=25)
-    drawCircle(40,40,30,fill='black')
+    drawOptions(app)
     drawSidePanel(app)
 
 def room1_intro_onMousePress(app,mouseX,mouseY):
     if inBegin(app,mouseX,mouseY):
         setActiveScreen('over')
     sidePanelClick(app,mouseX,mouseY)
+    if distance(mouseX,mouseY,40,110)<=30:
+        app.callingForMap="room1_intro"
+        setActiveScreen("map")
 #_______________________________________________
 def over_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')
