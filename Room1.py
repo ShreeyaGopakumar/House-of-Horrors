@@ -20,10 +20,11 @@ def redrawAll(app):
     
 
 def click(mouseX,mouseY):
+    block_puzzle.onMousePress(mouseX,mouseY)
     if 200<=mouseX<=200+50 and app.height//2+100<=mouseY<=app.height//2+100+30:
         app.blockPuzzle=True
     if app.clock:
-        app.clues_found.append("clock")
+        app.room1clues_found.append("clock")
     #if "key" in app.room1clues_found:
     #    app.drawerOpen=True
     #if "clock" in app.room1clues_found:

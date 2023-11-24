@@ -25,13 +25,20 @@ def redrawAll(app):
             (x2,y2)=app.points[i+1]
             drawLine(x,y,x2,y2,fill='white')
         drawCircle(app.cx,app.cy,20,fill='white')
-        drawCircle(app.cx,app.cy,5,fill='black')
+        drawCircle(app.cx,app.cy,10,fill='black')
         
         drawLabel(f'{app.message}',app.width//2,app.canvasTop+100,fill='white',size=40,font='monospace')
-        drawLabel("<>",app.width//2,app.canvasTop+140,fill='white',size=20,font='monospace')
+        drawLabel("<>",app.width//2,app.canvasTop+150,fill='white',size=20,font='monospace')
         drawLabel("Guess what the eyeball is writing!",app.width//2,app.canvasTop+130,fill='white',font='monospace')
         if app.guessedWrong:
             drawLabel("WRONG!",app.width//2,app.height//2+100,fill='white')
+    if app.gameOver and not app.clock:
+        drawRect(app.width//2,app.height//2,400,400,fill='black',align='center')
+        drawLabel("You crossed the first puzzle!",app.width//2,app.height//2-100,fill='white',font='monospace')
+        drawLabel("Use the word you found to guess the next location",app.width//2,app.height//2,fill='white',font='monospace')
+        drawRect(app.width//2,app.height//2+150,70,50,border='white',align='center')
+        drawLabel("Proceed",app.width//2,app.height//2+150,fill='white',font='monospace')
+        
 def click(app,key):
     if not app.gameOver:
         if len(key)==1 and 'a'<=key<='z':
@@ -42,7 +49,7 @@ def click(app,key):
             else:
                 if app.message=='clock':
                     app.gameOver=True
-                    app.clock=True
+                    
                 else:
                     if app.message=="cloc":
                         app.cx=app.canvasLeft+150
@@ -162,3 +169,7 @@ def K(app,key):
             if app.cy>300+app.canvasTop:
                 app.cy-=10
     app.points.append((app.cx,app.cy))
+
+def onMousePress(mouseX,mouseY):
+    if app.gameOver and app.width//2-35<=mouseX<=app.width//2+35 and app.height//2+150-25<=mouseY<=app.height//2+150+25:
+        app.clock=True
