@@ -1,8 +1,8 @@
 from cmu_graphics import*
 
 def onAppStart(app):
-    app.height=400
-    app.width=400
+    app.height=1300
+    app.width=750
     app.color='maroon'
     app.cx=200
     app.cy=300
