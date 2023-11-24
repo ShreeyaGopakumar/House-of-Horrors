@@ -1,7 +1,7 @@
 from cmu_graphics import *
 import block_puzzle
 def clues(app):
-    app.room1clues_tofind=["clock","key"]
+    app.room1clues_tofind=["clock"]
     app.room1clues_found=[]
     app.drawerOpen=False
     app.keyFound=False
