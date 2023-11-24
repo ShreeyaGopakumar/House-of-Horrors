@@ -17,16 +17,19 @@ def features(app):
     
 def redrawAll(app):
     
-    if app.gameOver:
-        drawLabel("GAME OVER",app.width//2,app.height//2)
-    else:
+        
+    if not app.gameOver:
         drawRect(app.width//2,app.height//2,400,400,fill='black',align='center')
-        drawCircle(app.cx,app.cy,20,fill='white')
         for i in range(len(app.points)-1):
             (x,y)=app.points[i]
             (x2,y2)=app.points[i+1]
             drawLine(x,y,x2,y2,fill='white')
-        drawLabel(f'{app.message}',app.width//2,app.height//2+300,fill='white')
+        drawCircle(app.cx,app.cy,20,fill='white')
+        drawCircle(app.cx,app.cy,5,fill='black')
+        
+        drawLabel(f'{app.message}',app.width//2,app.canvasTop+100,fill='white',size=40,font='monospace')
+        drawLabel("<>",app.width//2,app.canvasTop+140,fill='white',size=20,font='monospace')
+        drawLabel("Guess what the eyeball is writing!",app.width//2,app.canvasTop+130,fill='white',font='monospace')
         if app.guessedWrong:
             drawLabel("WRONG!",app.width//2,app.height//2+100,fill='white')
 def click(app,key):
@@ -39,6 +42,7 @@ def click(app,key):
             else:
                 if app.message=='clock':
                     app.gameOver=True
+                    app.clock=True
                 else:
                     if app.message=="cloc":
                         app.cx=app.canvasLeft+150
@@ -61,6 +65,7 @@ def click(app,key):
             C(app,key)
         if app.message=='cloc':
             K(app,key)
+        
 
 def C(app,key):
     if key=='left':
