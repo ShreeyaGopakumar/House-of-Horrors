@@ -2,6 +2,7 @@ from cmu_graphics import *
 from PIL import Image
 import os, pathlib
 import doors
+import Room1
 def drawSidePanel(app):
     if app.sidePanel:
         drawRect(0,0,150,app.height,fill='black',border="white")
@@ -64,7 +65,12 @@ def onAppStart(app):
     app.door2Width,app.door2Height = app.door2.width,app.door2.height
     app.door2 = CMUImage(app.door2)
     
+    app.draw1=openImage("images/draw1.png")
+    app.draw1 = CMUImage(app.draw1)
+    app.draw2=openImage("images/draw2.png")
+    app.draw2 = CMUImage(app.draw2)
     
+
 def welcome_redrawAll(app):
     drawImage(app.bg,0,0,width=app.bgWidth,height=app.bgHeight)
     drawLabel("HOUSE OF HORRORS",app.width//2,app.height//2-100,fill='white',font="monospace",size=100,bold=True)
@@ -129,10 +135,8 @@ def door1_onMousePress(app,mouseX,mouseY):
     
 #_______________________________________________
 def room1_redrawAll(app):
-    
+    Room1.redrawAll(app)
     drawRect(0,0,app.width,app.height,fill="grey")
-    drawLabel("INTRO TO MINI-GAME 1",app.width//2,app.height//2,font='monospace',size=60)
-    drawLabel("START!",app.width//2,app.height//2+125,fill="white",font="monospace",size=25)
     drawOptions(app)
     drawSidePanel(app)
 
