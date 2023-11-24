@@ -30,7 +30,6 @@ def drawOptions(app):
     
 def onAppStart(app):
     app.sidePanel=False
-    app.drawerOpen=False
     app.width=1300
     app.height=750
     def openImage(fileName):
@@ -66,13 +65,17 @@ def onAppStart(app):
     app.door2Width,app.door2Height = app.door2.width,app.door2.height
     app.door2 = CMUImage(app.door2)
     
-    app.drawer1=openImage("images/draw1.png")
-    app.drawer1Width,app.drawer1Height=app.width-100,app.height
-    app.drawer1 = CMUImage(app.drawer1)
-    app.drawer2=openImage("images/draw2.png")
-    app.drawer2Width,app.drawer2Height=app.width-100,app.height
-    app.drawer2 = CMUImage(app.drawer2)
-    
+    #app.drawer1=openImage("images/draw1.png")
+    #app.drawer1Width,app.drawer1Height=app.width-100,app.height
+    #app.drawer1 = CMUImage(app.drawer1)
+    #app.drawer2=openImage("images/draw2.png")
+    #app.drawer2Width,app.drawer2Height=app.width-100,app.height
+    #app.drawer2 = CMUImage(app.drawer2)
+    app.room1_frame1=openImage("images/room1_frame1.png")
+    app.room1_frame1=CMUImage(app.room1_frame1)
+    app.room1_frame2=openImage("images/room1_frame2.png")
+    app.room1_frame2=CMUImage(app.room1_frame2)
+
     
 
 def welcome_redrawAll(app):
@@ -138,8 +141,12 @@ def door1_onMousePress(app,mouseX,mouseY):
         setActiveScreen("room1")
     
 #_______________________________________________
+def room1_onAppStart(app):
+    Room1.clues(app)
+    
 def room1_redrawAll(app):
     Room1.redrawAll(app)
+
     drawOptions(app)
     drawSidePanel(app)
 

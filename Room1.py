@@ -1,13 +1,23 @@
 from cmu_graphics import *
 
+def clues(app):
+    app.room1clues_tofind=["morse code","key"]
+    app.room1clues_found=[]
+    app.drawerOpen=False
+    app.key=False
+
 def redrawAll(app):
     drawRect(0,0,app.width,app.height,fill="maroon")
     if app.drawerOpen:
-        drawImage(app.drawer2,50,0,width=app.drawer2Width,height=app.drawer2Height)
-
+        drawImage(app.room1_frame2,0,50,width=app.width,height=app.height-100)
     else:
-        drawImage(app.drawer1,50,0,width=app.drawer1Width,height=app.drawer1Height)
+        drawImage(app.room1_frame1,0,50,width=app.width,height=app.height-100)
+    
 
 def click(mouseX,mouseY):
-    app.drawerOpen=not app.drawerOpen
+    if "key" in app.room1clues_found:
+        app.drawerOpen=True
+    if "morse code" in app.room1clues_found:
+        app.key=True
+
 
