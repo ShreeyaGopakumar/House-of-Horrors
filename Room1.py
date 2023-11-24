@@ -1,6 +1,7 @@
 from cmu_graphics import *
 
 def redrawAll(app):
-    drawImage(app.draw1,app.width//2,app.height//2,width=app.draw1.width,height=app.draw1.height)
+    drawRect(0,0,app.width,app.height,fill="maroon")
+    drawImage(app.drawer1,0,app.height//2-150,width=app.drawer1Width,height=app.drawer1Height)
 
 

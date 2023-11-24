@@ -65,8 +65,11 @@ def onAppStart(app):
     app.door2Width,app.door2Height = app.door2.width,app.door2.height
     app.door2 = CMUImage(app.door2)
     
-    app.draw1=openImage("images/draw1.png")
-    app.draw1 = CMUImage(app.draw1)
+    app.drawer1=openImage("images/draw1.png")
+    app.drawer1Width,app.drawer1Height=app.drawer1.width-50,app.drawer1.height-50
+    app.drawer1 = CMUImage(app.drawer1)
+    
+
     app.draw2=openImage("images/draw2.png")
     app.draw2 = CMUImage(app.draw2)
     
@@ -136,7 +139,6 @@ def door1_onMousePress(app,mouseX,mouseY):
 #_______________________________________________
 def room1_redrawAll(app):
     Room1.redrawAll(app)
-    drawRect(0,0,app.width,app.height,fill="grey")
     drawOptions(app)
     drawSidePanel(app)
 
