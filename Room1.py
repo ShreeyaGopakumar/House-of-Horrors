@@ -9,9 +9,9 @@ def clues(app):
 def redrawAll(app):
     drawRect(0,0,app.width,app.height,fill="maroon")
     if app.drawerOpen:
-        drawImage(app.room1_frame2,0,50,width=app.width,height=app.height-100)
+        drawImage(app.room1_frame2,0,50,width=app.width,height=app.height)
     else:
-        drawImage(app.room1_frame1,0,50,width=app.width,height=app.height-100)
+        drawImage(app.room1_frame1,0,50,width=app.width,height=app.height)
     block_puzzle.redrawAll(app)
     
 
