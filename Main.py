@@ -71,7 +71,8 @@ def onAppStart(app):
     app.room1_frame2=openImage("images/room1_frame2.png")
     app.room1_frame2=CMUImage(app.room1_frame2)
 
-    
+    app.key=openImage("images/key.png")
+    app.key=CMUImage(app.key)
 
 def welcome_redrawAll(app):
     drawImage(app.bg,0,0,width=app.bgWidth,height=app.bgHeight)
