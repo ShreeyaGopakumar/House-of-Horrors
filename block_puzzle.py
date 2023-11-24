@@ -18,10 +18,10 @@ def redrawAll(app):
         drawLabel("GAME OVER",app.width//2,app.height//2)
     else:
         drawCircle(app.cx,app.cy,20,fill='black')
-        #for i in range(len(app.points)-1):
-        #    (x,y)=app.points[i]
-        #    (x2,y2)=app.points[i+1]
-        #    drawLine(x,y,x2,y2,fill='black')
+        for i in range(len(app.points)-1):
+            (x,y)=app.points[i]
+            (x2,y2)=app.points[i+1]
+            drawLine(x,y,x2,y2,fill='black')
         drawLabel(f'{app.message}',app.width//2,350)
         if app.guessedWrong:
             drawLabel("WRONG!",app.width//2,10)
