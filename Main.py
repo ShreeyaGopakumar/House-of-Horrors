@@ -30,6 +30,7 @@ def drawOptions(app):
     
 def onAppStart(app):
     app.sidePanel=False
+    app.drawerOpen=False
     app.width=1300
     app.height=750
     def openImage(fileName):
@@ -66,12 +67,12 @@ def onAppStart(app):
     app.door2 = CMUImage(app.door2)
     
     app.drawer1=openImage("images/draw1.png")
-    app.drawer1Width,app.drawer1Height=app.drawer1.width-50,app.drawer1.height-50
+    app.drawer1Width,app.drawer1Height=app.width-100,app.height
     app.drawer1 = CMUImage(app.drawer1)
+    app.drawer2=openImage("images/draw2.png")
+    app.drawer2Width,app.drawer2Height=app.width-100,app.height
+    app.drawer2 = CMUImage(app.drawer2)
     
-
-    app.draw2=openImage("images/draw2.png")
-    app.draw2 = CMUImage(app.draw2)
     
 
 def welcome_redrawAll(app):
@@ -143,8 +144,7 @@ def room1_redrawAll(app):
     drawSidePanel(app)
 
 def room1_onMousePress(app,mouseX,mouseY):
-    if inBegin(app,mouseX,mouseY):
-        setActiveScreen('over')
+    Room1.click(mouseX,mouseY)
     sidePanelClick(app,mouseX,mouseY)
     if distance(mouseX,mouseY,40,110)<=30:
         app.callingForMap="room1"
