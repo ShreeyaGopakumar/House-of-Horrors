@@ -125,10 +125,10 @@ def door1_onMousePress(app,mouseX,mouseY):
         app.callingForMap="door1"
         setActiveScreen("map")
     if app.flag==3:
-        setActiveScreen("room1_intro")
+        setActiveScreen("room1")
     
 #_______________________________________________
-def room1_intro_redrawAll(app):
+def room1_redrawAll(app):
     
     drawRect(0,0,app.width,app.height,fill="grey")
     drawLabel("INTRO TO MINI-GAME 1",app.width//2,app.height//2,font='monospace',size=60)
@@ -136,12 +136,12 @@ def room1_intro_redrawAll(app):
     drawOptions(app)
     drawSidePanel(app)
 
-def room1_intro_onMousePress(app,mouseX,mouseY):
+def room1_onMousePress(app,mouseX,mouseY):
     if inBegin(app,mouseX,mouseY):
         setActiveScreen('over')
     sidePanelClick(app,mouseX,mouseY)
     if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="room1_intro"
+        app.callingForMap="room1"
         setActiveScreen("map")
 #_______________________________________________
 def over_redrawAll(app):
