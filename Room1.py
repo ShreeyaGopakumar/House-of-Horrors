@@ -12,7 +12,8 @@ def redrawAll(app):
     drawRect(0,0,app.width,app.height,fill="maroon")
     if app.drawerOpen:
         drawImage(app.room1_frame2,0,0,width=app.width,height=app.height)
-        drawImage(app.candles,250,600,width=30,height=50,align='center')
+        if app.candles not in app.clues:
+            drawImage(app.candles,250,600,width=30,height=50,align='center')
     else:
         drawImage(app.room1_frame1,0,0,width=app.width,height=app.height)
     if not app.clock:

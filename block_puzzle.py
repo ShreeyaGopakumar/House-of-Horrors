@@ -14,16 +14,19 @@ def features(app):
     app.cx=app.canvasLeft+200
     app.cy=app.canvasTop+300
     app.points=[(app.cx,app.cy)]
+    app.showHints=False
     
 def redrawAll(app):
     
         
     if not app.gameOver:
         drawRect(app.width//2,app.height//2,400,400,fill='black',align='center')
-        for i in range(len(app.points)-1):
-            (x,y)=app.points[i]
-            (x2,y2)=app.points[i+1]
-            drawLine(x,y,x2,y2,fill='white')
+        if app.showHints:
+            for i in range(len(app.points)-1):
+                (x,y)=app.points[i]
+                (x2,y2)=app.points[i+1]
+                drawLine(x,y,x2,y2,fill='white')
+
         drawCircle(app.cx,app.cy,20,fill='white')
         drawCircle(app.cx,app.cy,10,fill='black')
         
@@ -32,10 +35,15 @@ def redrawAll(app):
         drawLabel("Guess what the eyeball is writing!",app.width//2,app.canvasTop+130,fill='white',font='monospace')
         if app.guessedWrong:
             drawLabel("WRONG!",app.width//2,app.height//2+100,fill='white')
+        
+        if not app.showHints:
+            drawRect(app.width//2-180,app.height//2+180,40,20,fill='white',align='center')
+            drawLabel("Hints",app.width//2-180,app.height//2+180,fill='black')
+            
     if app.gameOver and not app.clock:
         drawRect(app.width//2,app.height//2,400,400,fill='black',align='center')
-        drawLabel("You crossed the first puzzle!",app.width//2,app.height//2-100,fill='white',font='monospace')
-        drawLabel("Use the word you found to guess the next location",app.width//2,app.height//2,fill='white',font='monospace')
+        drawLabel("You crossed the first puzzle!",app.width//2,app.height//2-100,fill='white',font='monospace',size=23)
+        drawLabel("Use the word you found to guess the next location",app.width//2,app.height//2-50,fill='white',font='monospace')
         drawRect(app.width//2,app.height//2+150,70,50,border='white',align='center')
         drawLabel("Proceed",app.width//2,app.height//2+150,fill='white',font='monospace')
         
@@ -171,5 +179,7 @@ def K(app,key):
     app.points.append((app.cx,app.cy))
 
 def onMousePress(mouseX,mouseY):
+    if not app.gameOver and app.width//2-180-20<=mouseX<=app.width//2-180+20 and app.height//2+180-10<=mouseY<=app.height//2+180+10:
+        app.showHints=True
     if app.gameOver and app.width//2-35<=mouseX<=app.width//2+35 and app.height//2+150-25<=mouseY<=app.height//2+150+25:
         app.clock=True
