@@ -156,6 +156,8 @@ def room1_onMousePress(app,mouseX,mouseY):
     if distance(mouseX,mouseY,40,110)<=30:
         app.callingForMap="room1"
         setActiveScreen("map")
+def room1_onKeyPress(app,key):
+    Room1.onKeyPress(app,key)
 #_______________________________________________
 def over_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')

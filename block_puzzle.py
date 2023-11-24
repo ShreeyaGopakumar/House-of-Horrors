@@ -1,8 +1,8 @@
 from cmu_graphics import*
 
-def onAppStart(app):
-    app.height=1300
-    app.width=750
+def features(app):
+    app.height=750
+    app.width=1300
     app.color='maroon'
     app.cx=200
     app.cy=300
@@ -25,7 +25,7 @@ def redrawAll(app):
         drawLabel(f'{app.message}',app.width//2,350)
         if app.guessedWrong:
             drawLabel("WRONG!",app.width//2,10)
-def onKeyPress(app,key):
+def click(app,key):
     if not app.gameOver:
         if len(key)==1 and 'a'<=key<='z':
             app.message+=key
@@ -153,8 +153,3 @@ def K(app,key):
             if app.cy>300:
                 app.cy-=10
     app.points.append((app.cx,app.cy))
-
-def main():
-    runApp()
-
-main()
