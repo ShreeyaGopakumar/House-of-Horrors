@@ -80,7 +80,8 @@ def click(app,key):
             C(app,key)
         if app.message=='cloc':
             K(app,key)
-        
+    if app.gameOver and key=='enter':
+        app.clock=True   
 
 def C(app,key):
     if key=='left':
