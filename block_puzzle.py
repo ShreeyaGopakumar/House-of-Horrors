@@ -31,8 +31,8 @@ def redrawAll(app):
         drawCircle(app.cx,app.cy,10,fill='black')
         
         drawLabel(f'{app.message}',app.width//2,app.canvasTop+100,fill='white',size=40,font='monospace')
-        drawLabel("<>",app.width//2,app.canvasTop+150,fill='white',size=20,font='monospace')
-        drawLabel("Guess what the eyeball is writing!",app.width//2,app.canvasTop+130,fill='white',font='monospace')
+        drawLabel("Use you arrow keys to move the eyeball",app.width//2,app.canvasTop+150,fill='white',size=15,font='monospace')
+        drawLabel("Guess what the eyeball is writing!",app.width//2,app.canvasTop+130,fill='white',font='monospace',size=15)
         if app.guessedWrong:
             drawLabel("WRONG!",app.width//2,app.height//2+100,fill='white')
         
