@@ -70,6 +70,8 @@ def onAppStart(app):
     app.room1_frame1=CMUImage(app.room1_frame1)
     app.room1_frame2=openImage("images/room1_frame2.png")
     app.room1_frame2=CMUImage(app.room1_frame2)
+    app.control=openImage("images/Control and Instructions.png")
+    app.control=CMUImage(app.control)
 
     app.key=openImage("images/key.png")
     app.key=CMUImage(app.key)
@@ -92,7 +94,6 @@ def welcome_onMousePress(app,mouseX,mouseY):
 #______________________________________________________
 
 def introScreen_redrawAll(app):
-    drawRect(0,0,app.width,app.height,fill='black')  
     drawImage(app.intro,0,0,width=app.introWidth,height=app.introHeight)
     nextArrow = chr(0x21e8)
     drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
@@ -103,8 +104,18 @@ def inArrow(app,mouseX,mouseY):
     return False
 def introScreen_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
+        setActiveScreen('instructions')
+#________________________________________________
+def instructions_redrawAll(app):
+    drawImage(app.control,0,0,width=app.width,height=app.height)
+    nextArrow = chr(0x21e8)
+    drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
+
+def instructions_onMousePress(app,mouseX,mouseY):
+    if inArrow(app,mouseX,mouseY):
         app.callingForMap="door1"
         setActiveScreen('map')
+
 #________________________________________________
 def map_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')
