@@ -216,7 +216,7 @@ def room2_onMousePress(app,mouseX,mouseY):
 def over_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')
     drawRect(app.width//2-100,app.height//2+100,200,50,fill='black',border='white')
-    drawLabel("YOU WON!",app.width//2,app.height//2+125,fill="white",font="monospace",size=25)
+    drawLabel("YOU WON!",app.width//2,app.height//2+125,fill="white",font="caveat",size=25)
 
 
 def main():
