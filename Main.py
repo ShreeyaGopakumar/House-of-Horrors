@@ -26,7 +26,7 @@ def drawOptions(app):
     drawCircle(40,40,30,fill='black')
     drawLabel("CLUES",40,40,fill='white',font='monospace')
     drawCircle(40,110,30,fill='black')
-    drawLabel("MAP",40,110,fill='white',font='monospace')
+    drawLabel("*",40,110,fill='white',font='monospace',size=30)
 #_______________________________________________________________
 '''Images used:
 Background: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/
