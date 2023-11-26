@@ -73,8 +73,8 @@ def onAppStart(app):
     app.control=openImage("images/Control and Instructions.png")
     app.control=CMUImage(app.control)
 
-    app.key=openImage("images/key.png")
-    app.key=CMUImage(app.key)
+    app.room2=openImage("images/room2.jpeg")
+    app.room2=CMUImage(app.room2)
 
 def welcome_redrawAll(app):
     drawImage(app.bg,0,0,width=app.bgWidth,height=app.bgHeight)
@@ -170,9 +170,29 @@ def room1_onMousePress(app,mouseX,mouseY):
         setActiveScreen("map")
     if app.candles in app.clues:
         if inArrow(app,mouseX,mouseY):
-            setActiveScreen("over")
+            setActiveScreen("room2")
 def room1_onKeyPress(app,key):
     Room1.onKeyPress(app,key)
+#_______________________________________________
+
+def room2_redrawAll(app):
+    drawImage(app.room2,0,0,width=app.width,height=app.height)
+    nextArrow = chr(0x21e8)
+    drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
+
+    drawOptions(app)
+    drawSidePanel(app)
+    
+
+def room2_onMousePress(app,mouseX,mouseY):
+    sidePanelClick(app,mouseX,mouseY)
+    if distance(mouseX,mouseY,40,110)<=30:
+        app.callingForMap="room2"
+        setActiveScreen("map")
+    if inArrow(app,mouseX,mouseY):
+            setActiveScreen("over")
+
+
 #_______________________________________________
 def over_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')
