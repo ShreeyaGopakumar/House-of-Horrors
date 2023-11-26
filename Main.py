@@ -124,7 +124,7 @@ def map_redrawAll(app):
     drawImage(app.candles,app.width//2-400,app.height//2-100,width=75,height=100,align='center')
     drawCircle(app.width-50,50,30,fill='white')
     drawLabel(">",app.width-50,50,fill='black',bold=True,size=60)
-    drawLabel("MAP",app.width//2,30,fill='white',bold=True, size=60, font='monospace')
+    drawLabel("MAP",app.width//2,40,fill='white',bold=True, size=60, font='monospace')
 
 def map_onMousePress(app,mouseX,mouseY):
     if distance(mouseX,mouseY,app.width-50,50)<=30:
