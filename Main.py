@@ -69,9 +69,6 @@ def onAppStart(app):
     app.map = openImage("images/map.jpg")
     app.map = CMUImage(app.map)
     
-    app.clues=[]
-    app.clues_tofind=[app.candles,app.clown]
-    
     app.door1 = openImage("images/door1.png")
     app.door1Width,app.door1Height = app.door1.width,app.door1.height
     app.door1 = CMUImage(app.door1)
@@ -93,6 +90,18 @@ def onAppStart(app):
     app.room2=openImage("images/room2.jpg")
     app.room2=CMUImage(app.room2)
 
+    app.skull=openImage("images/skull.png")
+    app.skull=CMUImage(app.skull)
+    app.chucky=openImage("images/chucky.png")
+    app.chucky=CMUImage(app.chucky)
+    app.arrow=openImage("images/arrow.png")
+    app.arrowWidth,app.arrowHeight=app.arrow.width,app.arrow.height
+    app.arrow=CMUImage(app.arrow)
+    app.tick=openImage("images/tick.png")
+    app.tick=CMUImage(app.tick)
+    app.clues=[]
+    app.clues_tofind=[app.candles,app.skull,app.chucky,app.clown]
+
 def welcome_redrawAll(app):
     drawImage(app.bg,0,0,width=app.bgWidth,height=app.bgHeight)
     drawRect(app.width//2,app.height//2-100,app.width,100,fill='black', align='center')
@@ -113,8 +122,7 @@ def welcome_onMousePress(app,mouseX,mouseY):
 
 def introScreen_redrawAll(app):
     drawImage(app.intro,0,0,width=app.introWidth,height=app.introHeight)
-    nextArrow = chr(0x21e8)
-    drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
+    drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
 
 def inArrow(app,mouseX,mouseY):
     if app.width-115<=mouseX<=app.width-15 and app.height//2-60<=mouseY<=app.height//2+60:
@@ -126,8 +134,7 @@ def introScreen_onMousePress(app,mouseX,mouseY):
 #________________________________________________
 def instructions_redrawAll(app):
     drawImage(app.control,0,0,width=app.width,height=app.height)
-    nextArrow = chr(0x21e8)
-    drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
+    drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
 
 def instructions_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
@@ -137,15 +144,29 @@ def instructions_onMousePress(app,mouseX,mouseY):
 #________________________________________________
 def map_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')
-    drawImage(app.map,app.width//2,app.height//2,width=1000,height=500,align='center')
-    drawImage(app.clown,app.width//2-270,app.height//2-100,width=75,height=100,align='center')
-    drawImage(app.candles,app.width//2-400,app.height//2-100,width=75,height=100,align='center')
-    drawCircle(app.width-50,50,30,fill='white')
-    drawLabel(">",app.width-50,50,fill='black',bold=True,size=60)
-    drawLabel("MAP",app.width//2,40,fill='white',bold=True, size=60, font='monospace')
+    #drawImage(app.map,app.width//2,app.height//2,width=1000,height=500,align='center')
+    #drawImage(app.clown,app.width//2-270,app.height//2-100,width=75,height=100,align='center')
+    #drawImage(app.candles,app.width//2-400,app.height//2-100,width=75,height=100,align='center')
+    crossed_distance=50
+    for x in range(len(app.clues)):
+        drawImage(app.clues[x],crossed_distance+20,app.height//2-140,width=100,height=140)
+        drawImage(app.tick,crossed_distance+70,app.height//2+20,width=40,height=40,align='center')
+        crossed_distance+=250
+
+        
+    crossed_distance=50
+    for x in range(len(app.clues_tofind)):
+        drawImage(app.clues_tofind[x],crossed_distance+20,app.height//2-140,width=100,height=140,opacity=50)
+        crossed_distance+=250
+    
+    drawLabel("PROGRESS",app.width//2,40,fill='white', size=80, font='monospace')
+    drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
+    drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
+    
+        
 
 def map_onMousePress(app,mouseX,mouseY):
-    if distance(mouseX,mouseY,app.width-50,50)<=30:
+    if inArrow(app,mouseX,mouseY):
         setActiveScreen(app.callingForMap)
 #__________________________________________________
 
@@ -175,8 +196,8 @@ def room1_redrawAll(app):
     drawOptions(app)
     drawSidePanel(app)
     if app.candles in app.clues:
-        nextArrow = chr(0x21e8)
-        drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
+        drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
+    
     
 
 def room1_onMousePress(app,mouseX,mouseY):
@@ -195,8 +216,9 @@ def room1_onKeyPress(app,key):
 
 def room2_intro_redrawAll(app):
     drawImage(app.room2_intro,0,0,width=app.width,height=app.height)
-    nextArrow = chr(0x21e8)
-    drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
+    drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
+    drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
+    
 
     drawOptions(app)
     drawSidePanel(app)
@@ -214,8 +236,9 @@ def room2_intro_onMousePress(app,mouseX,mouseY):
 
 def room2_redrawAll(app):
     drawImage(app.room2,0,0,width=app.width,height=app.height)
-    nextArrow = chr(0x21e8)
-    drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
+    drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
+    drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
+    
 
     drawOptions(app)
     drawSidePanel(app)
