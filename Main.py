@@ -72,7 +72,9 @@ def onAppStart(app):
     app.room1_frame2=CMUImage(app.room1_frame2)
     app.control=openImage("images/Control and Instructions.png")
     app.control=CMUImage(app.control)
-
+    
+    app.room2_intro=openImage("images/room2_intro.jpeg")
+    app.room2_intro=CMUImage(app.room2_intro)
     app.room2=openImage("images/room2.jpeg")
     app.room2=CMUImage(app.room2)
 
@@ -176,7 +178,7 @@ def room1_onKeyPress(app,key):
 #_______________________________________________
 
 def room2_intro_redrawAll(app):
-    drawImage(app.room2,0,0,width=app.width,height=app.height)
+    drawImage(app.room2_intro,0,0,width=app.width,height=app.height)
     nextArrow = chr(0x21e8)
     drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
 
@@ -190,9 +192,26 @@ def room2_intro_onMousePress(app,mouseX,mouseY):
         app.callingForMap="room2_intro"
         setActiveScreen("map")
     if inArrow(app,mouseX,mouseY):
+            setActiveScreen("room2")
+
+#_______________________________________________
+
+def room2_redrawAll(app):
+    drawImage(app.room2,0,0,width=app.width,height=app.height)
+    nextArrow = chr(0x21e8)
+    drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
+
+    drawOptions(app)
+    drawSidePanel(app)
+    
+
+def room2_onMousePress(app,mouseX,mouseY):
+    sidePanelClick(app,mouseX,mouseY)
+    if distance(mouseX,mouseY,40,110)<=30:
+        app.callingForMap="room2"
+        setActiveScreen("map")
+    if inArrow(app,mouseX,mouseY):
             setActiveScreen("over")
-
-
 #_______________________________________________
 def over_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')
