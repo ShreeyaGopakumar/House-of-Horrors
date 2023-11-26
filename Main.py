@@ -85,9 +85,9 @@ def onAppStart(app):
     app.control=openImage("images/Control and Instructions.png")
     app.control=CMUImage(app.control)
     
-    app.room2_intro=openImage("images/room2_intro.jpg")
+    app.room2_intro=openImage("images/room2_intro.png")
     app.room2_intro=CMUImage(app.room2_intro)
-    app.room2=openImage("images/room2.jpg")
+    app.room2=openImage("images/room2.png")
     app.room2=CMUImage(app.room2)
 
     app.skull=openImage("images/skull.png")
@@ -236,8 +236,9 @@ def room2_intro_onMousePress(app,mouseX,mouseY):
 
 def room2_redrawAll(app):
     drawImage(app.room2,0,0,width=app.width,height=app.height)
-    drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
-    drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
+    if app.skull in app.clues:
+        drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
+        drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
     
 
     drawOptions(app)
@@ -249,8 +250,10 @@ def room2_onMousePress(app,mouseX,mouseY):
     if distance(mouseX,mouseY,40,110)<=30:
         app.callingForMap="room2"
         setActiveScreen("map")
-    if inArrow(app,mouseX,mouseY):
+    if app.skull in app.clues:
+        if inArrow(app,mouseX,mouseY):
             setActiveScreen("over")
+
 #_______________________________________________
 def over_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')
