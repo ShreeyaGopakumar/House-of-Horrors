@@ -27,14 +27,29 @@ def drawOptions(app):
     drawLabel("CLUES",40,40,fill='white',font='monospace')
     drawCircle(40,110,30,fill='black')
     drawLabel("MAP",40,110,fill='white',font='monospace')
-    
+#_______________________________________________________________
+'''Images used:
+Background: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/
+Candles: https://gallery.yopriceville.com/Free-Clipart-Pictures/Halloween-PNG-Pictures/Lighted_Candles_Transparent_Image
+Clown mask: https://www.walmart.com/ip/Adult-Whacko-Clown-Full-Face-Mask/1402672413?wmlspartner=wlpa&selectedSellerId=737
+Doors: https://community.boschsecurity.com/t5/Security-Access-Control/How-to-set-up-interlock-APE/ta-p/12325
+Jumpscare: https://www.deviantart.com/zueiroooooooooooo/art/Nightmare-Freddy-Ucn-Jumpscare-FullBody-828859450
+Nun: https://www.newburyportnews.com/news/lifestyles/movie-review-in-the-nun-what-evil-lurks-beneath-a-habit/article_cfddb3f0-7974-5e1b-9e97-80bee389f993.html
+Map: https://brainchase.com/national-scavenger-hunt-day-coming/
+Room2 (corridor): <a href="https://www.freepik.com/free-photo/abandoned-alley-psychiatric-hospital_5600084.htm#query=creepy%20corridor&position=0&from_view=search&track=ais&uuid=b257c826-e514-4c68-be4b-33706549068d">Image by jcomp</a> on Freepik
+Room2 (mortuary): <a href="https://www.freepik.com/free-photo/abandoned-morgue-psychiatric-hospital_5600088.htm#query=creepy%20lab&position=0&from_view=search&track=ais&uuid=251a2fa0-7336-42d8-9fec-09b092841387">Image by jcomp</a> on Freepik
+
+Other screens - made on Canva
+'''
+#_______________________________________________________________
 def onAppStart(app):
     app.sidePanel=False
     app.width=1300
     app.height=750
     def openImage(fileName):
         return Image.open(os.path.join(pathlib.Path(__file__).parent,fileName))
-    app.bg = openImage("images/bg.jpg")
+    #________________________________
+    app.bg = openImage("images/bg.png")
     app.bgWidth,app.bgHeight = app.width,app.height
     app.bg = CMUImage(app.bg)
 
@@ -73,13 +88,14 @@ def onAppStart(app):
     app.control=openImage("images/Control and Instructions.png")
     app.control=CMUImage(app.control)
     
-    app.room2_intro=openImage("images/room2_intro.jpeg")
+    app.room2_intro=openImage("images/room2_intro.jpg")
     app.room2_intro=CMUImage(app.room2_intro)
-    app.room2=openImage("images/room2.jpeg")
+    app.room2=openImage("images/room2.jpg")
     app.room2=CMUImage(app.room2)
 
 def welcome_redrawAll(app):
     drawImage(app.bg,0,0,width=app.bgWidth,height=app.bgHeight)
+    drawRect(app.width//2,app.height//2-100,app.width,100,fill='black', align='center')
     drawLabel("HOUSE OF HORRORS",app.width//2,app.height//2-100,fill='white',font="monospace",size=100,bold=True)
     drawLabel("Face your biggest fears!",app.width//2,app.height//2,fill="white",font="monospace",size=45)
     drawRect(app.width//2-100,app.height//2+100,200,50,fill='black',border='white')

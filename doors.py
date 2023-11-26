@@ -33,10 +33,7 @@ def redrawAll(app):
         drawImage(app.door2,app.width//2+app.door1Width+60,app.height//2+15,width=app.door2Width,height=app.door2Height,align='center')
 
     drawRect(0,app.height//2+app.door1Height//2-10,app.width,app.height-app.height//2-app.door1Height//2,fill='black')
-    
-    #if not app.foundCandle:
-    #    drawCircle(app.width//2,app.height//2,80,fill='white')    
-    #    drawImage(app.candles,app.width//2,app.height//2,width=50,height=80)
+
     
 def click(mouseX,mouseY):
     if app.width//2-app.door1Width//2<=mouseX<=app.width//2+app.door1Width//2 and app.height//2-app.door1Height//2<=mouseY<=app.height//2+app.door2Height:
@@ -47,9 +44,5 @@ def click(mouseX,mouseY):
         app.RdoorOpen=True
     if app.width//2+app.door1Width+60-app.door1Width//2<=mouseX<=app.width//2+app.door1Width+60+app.door1Width//2 and app.height//2-app.door1Height//2<=mouseY<=app.height//2+app.door1Height//2 and app.RdoorOpen:
         app.flag+=1
-    
-    #if distance(mouseX,mouseY,app.width//2,app.height//2)<=80:
-    #    app.clues.append(app.candles)
-    #    app.foundCandle=True
-    
+
 

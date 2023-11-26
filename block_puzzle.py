@@ -34,7 +34,7 @@ def redrawAll(app):
         drawLabel("Use the arrow keys to move the eyeball",app.width//2,app.canvasTop+150,fill='white',size=15,font='monospace')
         drawLabel("Guess what letter the eyeball is writing!",app.width//2,app.canvasTop+130,fill='white',font='monospace',size=15)
         if app.guessedWrong:
-            drawLabel("WRONG!",app.width//2,app.height//2+100,fill='white')
+            drawLabel("WRONG!",app.width//2,app.height//2+100,fill='white',font='monospace')
         
         if not app.showHints:
             drawRect(app.width//2-180,app.height//2+180,40,20,fill='white',align='center')
