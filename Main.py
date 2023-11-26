@@ -3,6 +3,7 @@ from PIL import Image
 import os, pathlib
 import doors
 import Room1
+import Room2
 def drawSidePanel(app):
     if app.sidePanel:
         drawRect(0,0,150,app.height,fill='black',border="white")
@@ -233,14 +234,14 @@ def room2_intro_onMousePress(app,mouseX,mouseY):
             setActiveScreen("room2")
 
 #_______________________________________________
-
+def room2_onAppStart(app):
+    Room2.clues(app)
 def room2_redrawAll(app):
-    drawImage(app.room2,0,0,width=app.width,height=app.height)
     if app.skull in app.clues:
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
         drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
     
-
+    Room2.redrawAll(app)
     drawOptions(app)
     drawSidePanel(app)
     
