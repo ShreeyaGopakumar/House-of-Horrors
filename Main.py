@@ -170,12 +170,12 @@ def room1_onMousePress(app,mouseX,mouseY):
         setActiveScreen("map")
     if app.candles in app.clues:
         if inArrow(app,mouseX,mouseY):
-            setActiveScreen("room2")
+            setActiveScreen("room2_intro")
 def room1_onKeyPress(app,key):
     Room1.onKeyPress(app,key)
 #_______________________________________________
 
-def room2_redrawAll(app):
+def room2_intro_redrawAll(app):
     drawImage(app.room2,0,0,width=app.width,height=app.height)
     nextArrow = chr(0x21e8)
     drawLabel(nextArrow, app.width-65, app.height//2, size=200, font='symbols')
@@ -184,10 +184,10 @@ def room2_redrawAll(app):
     drawSidePanel(app)
     
 
-def room2_onMousePress(app,mouseX,mouseY):
+def room2_intro_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
     if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="room2"
+        app.callingForMap="room2_intro"
         setActiveScreen("map")
     if inArrow(app,mouseX,mouseY):
             setActiveScreen("over")
