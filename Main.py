@@ -10,12 +10,13 @@ def drawSidePanel(app):
         drawRect(0,0,150,app.height,fill='black',border="white")
         drawRect(150,app.height//2,25,100,align='center',fill='white')
         crossed_distance=0
-        for x in range(len(app.clues)):
-            drawImage(app.clues[x],150/2-20,crossed_distance+20,width=60,height=100)
-            crossed_distance+=125
-        crossed_distance=0
         for x in range(len(app.clues_tofind)):
-            drawImage(app.clues_tofind[x],150/2-20,crossed_distance+20,width=60,height=100,opacity=50)
+            if app.clues_tofind[x] in app.clues:
+                drawImage(app.clues_tofind[x],150/2-20,crossed_distance+20,width=60,height=100)
+                drawImage(app.tick,150/2-20,crossed_distance+40,width=20,height=20,align='center')
+            
+            else:    
+                drawImage(app.clues_tofind[x],150/2-20,crossed_distance+20,width=60,height=100,opacity=50)
             crossed_distance+=125
 
 def sidePanelClick(app,mouseX,mouseY):
@@ -80,21 +81,18 @@ def instructions_onMousePress(app,mouseX,mouseY):
 #________________________________________________
 def map_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')
-    #drawImage(app.map,app.width//2,app.height//2,width=1000,height=500,align='center')
-    #drawImage(app.clown,app.width//2-270,app.height//2-100,width=75,height=100,align='center')
-    #drawImage(app.candles,app.width//2-400,app.height//2-100,width=75,height=100,align='center')
-    crossed_distance=50
-    for x in range(len(app.clues)):
-        drawImage(app.clues[x],crossed_distance+20,app.height//2-140,width=100,height=140)
-        drawImage(app.tick,crossed_distance+70,app.height//2+20,width=40,height=40,align='center')
-        crossed_distance+=250
-
-        
     crossed_distance=50
     for x in range(len(app.clues_tofind)):
-        drawImage(app.clues_tofind[x],crossed_distance+20,app.height//2-140,width=100,height=140,opacity=50)
+        if app.clues_tofind[x] in app.clues:
+            drawImage(app.clues[x],crossed_distance+20,app.height//2-140,width=100,height=140)
+            drawImage(app.tick,crossed_distance+70,app.height//2+20,width=40,height=40,align='center')
+            
+        else:
+            drawImage(app.clues_tofind[x],crossed_distance+20,app.height//2-140,width=100,height=140,opacity=50)
         crossed_distance+=250
     
+
+        
     drawLabel("PROGRESS",app.width//2,40,fill='white', size=80, font='monospace')
     drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
     drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
