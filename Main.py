@@ -100,6 +100,12 @@ def onAppStart(app):
     app.arrow=CMUImage(app.arrow)
     app.tick=openImage("images/tick.png")
     app.tick=CMUImage(app.tick)
+    app.letter_puzzle=openImage("images/letter_puzzle.png")
+    app.letter_puzzleWidth,app.letter_puzzleHeight=app.letter_puzzle.width,app.letter_puzzle.height
+    app.letter_puzzle=CMUImage(app.letter_puzzle)
+
+    app.chest=openImage("images/chest.png")
+    app.chest=CMUImage(app.chest)
     app.clues=[]
     app.clues_tofind=[app.candles,app.skull,app.chucky,app.clown]
 
@@ -219,7 +225,6 @@ def room2_intro_redrawAll(app):
     drawImage(app.room2_intro,0,0,width=app.width,height=app.height)
     drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
     drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
-    
 
     drawOptions(app)
     drawSidePanel(app)
@@ -237,17 +242,19 @@ def room2_intro_onMousePress(app,mouseX,mouseY):
 def room2_onAppStart(app):
     Room2.clues(app)
 def room2_redrawAll(app):
-    if app.skull in app.clues:
-        drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
-        drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
-    
     Room2.redrawAll(app)
     drawOptions(app)
     drawSidePanel(app)
+    if app.skull in app.clues:
+        drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
+        drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
+        
+    
     
 
 def room2_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
+    Room2.click(mouseX,mouseY)
     if distance(mouseX,mouseY,40,110)<=30:
         app.callingForMap="room2"
         setActiveScreen("map")
@@ -255,6 +262,9 @@ def room2_onMousePress(app,mouseX,mouseY):
         if inArrow(app,mouseX,mouseY):
             setActiveScreen("over")
 
+
+def room2_onKeyPress(app,key):
+    Room2.onKeyPress(app,key)
 #_______________________________________________
 def over_redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='black')

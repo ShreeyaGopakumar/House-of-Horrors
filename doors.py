@@ -9,6 +9,7 @@ def features(app):
     app.flag=1
 def redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='grey')
+    drawRect(0,0,app.width,100,fill='white')
     drawLabel("ONE OF THESE DOORS LEADS TO YOUR FIRST STOP, PROFESSOR X'S STUDY!",app.width//2,20,font="monospace",size=30,fill='maroon')
     drawLabel("CHOOSE THE RIGHT DOOR IF YOU DARE!",app.width//2,60,font="monospace",size=30,fill='maroon')
     if not app.MdoorOpen:
