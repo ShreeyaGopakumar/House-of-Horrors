@@ -43,9 +43,9 @@ def click(mouseX,mouseY):
         app.puzzle=True
 
 def onKeyPress(app,key):
-    if len(key)==1 and 'a'<=key<='z' and len(app.input)<4:
+    if len(key)==1 and 'a'<=key<='z' and len(app.input)<4 and app.password:
         app.input+=key
-    if key=='enter':
+    if key=='enter' and app.password:
         if app.input=='pain':
             app.skullAppear=True
             app.password=False
