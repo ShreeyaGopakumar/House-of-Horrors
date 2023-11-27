@@ -17,13 +17,13 @@ def redrawAll(app):
             drawLabel("X",225,app.height//2+115,fill='black',rotateAngle=-8,font='monospace' )
         if app.puzzle:
             drawLabel("X",app.width//2+65,app.height//2+15,fill='maroon',bold=True,font='monospace')
-            drawImage(app.letter_puzzle,app.width-210,0,width=200,height=200)
+            drawImage(app.letter_puzzle,app.width-310,0,width=300,height=200)
         
         if app.password:
             drawRect(app.width//2+40,app.height//2+280,400,200,fill='black',align='center')
             drawLabel("Enter the 4-letter password",app.width//2+40,app.height//2+200,fill='white',font='monospace')
             if app.showHint:
-                drawLabel("Hint: blood",app.width//2+40,app.height//2+240,font='monospace',fill="white")
+                drawLabel("The blood and the grid reveals something horrifying",app.width//2+40,app.height//2+240,font='monospace',fill="white")
             drawLabel(app.input,app.width//2+40,app.height//2+270,fill='white',font='monospace',size=40)
             if not app.showHint:
                 drawRect(app.width//2-160,app.height-50,70,50,fill='white')
