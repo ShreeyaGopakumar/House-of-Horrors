@@ -71,6 +71,9 @@ def loadImages(app):
     app.chest=openImage("images/chest.png")
     app.chest=CMUImage(app.chest)
 
+    app.over=openImage("images/over.png")
+    app.over=CMUImage(app.over)
+
     #___________________________________________________________________________
     '''Images used:
     Background: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/

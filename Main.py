@@ -25,9 +25,9 @@ def sidePanelClick(app,mouseX,mouseY):
         if 150-25/2<=mouseX<=150+25/2 and app.height//2-50<=mouseY<=app.height//2+50:
             app.sidePanel=False
 def drawOptions(app):
-    drawCircle(40,40,30,fill='black')
+    drawCircle(40,40,30,fill='black',border='white')
     drawLabel("CLUES",40,40,fill='white',font='monospace')
-    drawCircle(40,110,30,fill='black')
+    drawCircle(40,110,30,fill='black',border='white')
     drawLabel("*",40,110,fill='white',font='monospace',size=30)
 
 def onAppStart(app):
@@ -196,10 +196,10 @@ def room2_onKeyPress(app,key):
     Room2.onKeyPress(app,key)
 #_______________________________________________
 def over_redrawAll(app):
-    drawRect(0,0,app.width,app.height,fill='black')
-    drawRect(app.width//2-100,app.height//2+100,200,50,fill='black',border='white')
-    drawLabel("YOU WON!",app.width//2,app.height//2+125,fill="white",font="monospace",size=25)
-
+    #drawRect(0,0,app.width,app.height,fill='black')
+    #drawRect(app.width//2-100,app.height//2+100,200,50,fill='black',border='white')
+    #drawLabel("YOU WON!",app.width//2,app.height//2+125,fill="white",font="monospace",size=25)
+    drawImage(app.over,0,0,width=app.width,height=app.height)
 
 def main():
     runAppWithScreens(initialScreen='welcome')
