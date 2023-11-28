@@ -85,6 +85,22 @@ def loadImages(app):
     
     app.floor2=openImage("images/floor2.png")
     app.floor2=CMUImage(app.floor2)
+
+    app.room3_frame1=openImage("images/room3_frame1.png")
+    app.room3_frame1=CMUImage(app.room3_frame1)
+    
+    app.room3_frame2=openImage("images/room3_frame2.png")
+    app.room3_frame2=CMUImage(app.room3_frame2)
+
+    app.room3_frame3=openImage("images/room3_frame3.png")
+    app.room3_frame3=CMUImage(app.room3_frame3)
+
+    #app.room3_frame4=openImage("images/room3_frame4.png")
+    #app.room3_frame4=CMUImage(app.room3_frame4)
+
+    
+    
+    
     #___________________________________________________________________________
     '''Images used:
     Background: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/

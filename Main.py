@@ -7,6 +7,7 @@ import Room2
 import floor1
 import floor2
 import image
+import Room3
 def drawSidePanel(app):
     if app.sidePanel:
         drawRect(0,0,150,app.height,fill='black',border="white")
@@ -276,11 +277,15 @@ def floor2_onMousePress(app,mouseX,mouseY):
         app.callingForMap="floor2"
         setActiveScreen("map")
 #_______________________________________________
+def room3_onAppStart(app):
+    Room3.features(app)
 def room3_redrawAll(app):
+    Room3.redrawAll(app)
     drawOptions(app)
     drawSidePanel(app)
 def room3_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
+    Room3.onMousePress(app,mouseX,mouseY)
     if distance(mouseX,mouseY,40,110)<=30:
         app.callingForMap="room3"
         setActiveScreen("map")

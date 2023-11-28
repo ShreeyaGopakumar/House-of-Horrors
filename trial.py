@@ -29,6 +29,8 @@ def onAppStart(app):
     app.cellWidth= app.boardWidth//app.cols
     app.cellHeight=app.boardHeight//app.rows
     app.pieceColor='white'
+    app.dx=0
+    app.dy=0
     
 def drawBoard(app):
     for row in range(app.rows):
@@ -70,15 +72,10 @@ def redrawAll(app):
     drawBoard(app)
     drawCircle((app.cx+1)*app.cellWidth,(app.cy)*app.cellHeight,10,fill='red')
 
-def onKeyPress(app,key):
-    if key=="up":
-        app.cy-=1
-    if key=="down":
-        app.cy+=1
-    if key=="left":
-        app.cx-=1
-    if key=='right':
-        app.cx+=1
+#def onKeyPress(app,key):
+    
+
+
 def main():
     runApp()
 
