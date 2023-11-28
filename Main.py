@@ -4,17 +4,19 @@ import os, pathlib
 import doors
 import Room1
 import Room2
+import floor1
 import image
 def drawSidePanel(app):
     if app.sidePanel:
         drawRect(0,0,150,app.height,fill='black',border="white")
         drawRect(150,app.height//2,25,100,align='center',fill='white')
         crossed_distance=0
+        for x in app.clues:
+            print(str(x))
         for x in range(len(app.clues_tofind)):
             if app.clues_tofind[x] in app.clues:
                 drawImage(app.clues_tofind[x],150/2-20,crossed_distance+20,width=60,height=100)
                 drawImage(app.tick,150/2-20,crossed_distance+40,width=20,height=20,align='center')
-            
             else:    
                 drawImage(app.clues_tofind[x],150/2-20,crossed_distance+20,width=60,height=100,opacity=50)
             crossed_distance+=125
@@ -75,35 +77,44 @@ def instructions_redrawAll(app):
 
 def instructions_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
-        app.callingForMap="door1"
+        app.callingForMap="floor1"
         setActiveScreen('map')
 
 #________________________________________________
 def map_redrawAll(app):
-    drawRect(0,0,app.width,app.height,fill='black')
-    crossed_distance=50
-    for x in range(len(app.clues_tofind)):
-        if app.clues_tofind[x] in app.clues:
-            drawImage(app.clues[x],crossed_distance+20,app.height//2-140,width=100,height=140)
-            drawImage(app.tick,crossed_distance+70,app.height//2+20,width=40,height=40,align='center')
-            
-        else:
-            drawImage(app.clues_tofind[x],crossed_distance+20,app.height//2-140,width=100,height=140,opacity=50)
-        crossed_distance+=250
+    #drawRect(0,0,app.width,app.height,fill='black')
+    #crossed_distance=50
+    #for x in range(len(app.clues_tofind)):
+    #    if app.clues_tofind[x] in app.clues:
+    #        drawImage(app.clues[x],crossed_distance+20,app.height//2-140,width=100,height=140)
+    #        drawImage(app.tick,crossed_distance+70,app.height//2+20,width=40,height=40,align='center')
+    #        
+    #    else:
+    #        drawImage(app.clues_tofind[x],crossed_distance+20,app.height//2-140,width=100,height=140,opacity=50)
+    #    crossed_distance+=250
     
 
         
-    drawLabel("PROGRESS",app.width//2,40,fill='white', size=80, font='monospace')
-    drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
+    #drawLabel("PROGRESS",app.width//2,40,fill='white', size=80, font='monospace')
+    #drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
+    drawImage(app.map,app.width//2,app.height//2,width=app.width,height=app.height-10,align='center')
     drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
-    
         
+
 
 def map_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
         setActiveScreen(app.callingForMap)
 #__________________________________________________
-
+def floor1_onAppStart(app):
+    floor1.onAppStart(app)
+def floor1_redrawAll(app):
+    floor1.redrawAll(app)
+def floor1_onMousePress(app,mouseX,mouseY):
+    room=floor1.onMousePress(app,mouseX,mouseY)
+    if room!=None:
+        setActiveScreen(room)
+#__________________________________________________
 def door1_onAppStart(app):
     doors.features(app)
     
@@ -143,7 +154,8 @@ def room1_onMousePress(app,mouseX,mouseY):
         setActiveScreen("map")
     if app.candles in app.clues:
         if inArrow(app,mouseX,mouseY):
-            setActiveScreen("room2_intro")
+            setActiveScreen("floor1")
+
 def room1_onKeyPress(app,key):
     Room1.onKeyPress(app,key)
 #_______________________________________________
@@ -187,7 +199,7 @@ def room2_onMousePress(app,mouseX,mouseY):
         setActiveScreen("map")
     if app.skull in app.clues:
         if inArrow(app,mouseX,mouseY):
-            setActiveScreen("over")
+            setActiveScreen("floor1")
 
 
 def room2_onKeyPress(app,key):

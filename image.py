@@ -31,7 +31,7 @@ def loadImages(app):
     app.chucky=openImage("images/chucky.png")
     app.chucky=CMUImage(app.chucky)
 
-    app.map = openImage("images/map.jpg")
+    app.map = openImage("images/map.png")
     app.map = CMUImage(app.map)
     
     app.door1 = openImage("images/door1.png")
@@ -74,6 +74,14 @@ def loadImages(app):
     app.over=openImage("images/over.png")
     app.over=CMUImage(app.over)
 
+    app.altar=openImage("images/altar.png")
+    app.altar=CMUImage(app.altar)
+
+    app.floor1=openImage("images/floor1.jpg")
+    app.floor1=CMUImage(app.floor1)
+
+    app.redArrow=openImage("images/redArrow.png")
+    app.redArrow=CMUImage(app.redArrow)
     #___________________________________________________________________________
     '''Images used:
     Background: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/
