@@ -11,8 +11,6 @@ def drawSidePanel(app):
         drawRect(0,0,150,app.height,fill='black',border="white")
         drawRect(150,app.height//2,25,100,align='center',fill='white')
         crossed_distance=0
-        for x in app.clues:
-            print(str(x))
         for x in range(len(app.clues_tofind)):
             if app.clues_tofind[x] in app.clues:
                 drawImage(app.clues_tofind[x],150/2-20,crossed_distance+20,width=60,height=100)
@@ -33,14 +31,25 @@ def drawOptions(app):
     drawCircle(40,110,30,fill='black',border='white')
     drawLabel("*",40,110,fill='white',font='monospace',size=30)
 
-def onAppStart(app):
+#def onAppStart(app):
+#    image.loadImages(app)
+#    app.clues_tofind=[app.candles,app.skull,app.chucky,app.clown]
+#    app.sidePanel=False
+#    app.width=1300
+#    app.height=750
+#    
+#    app.clues=[]
+    
+def welcome_onAppStart(app):
+    image.loadImages(app)
+    app.clues_tofind=[app.candles,app.skull,app.chucky,app.clown]
     app.sidePanel=False
     app.width=1300
     app.height=750
-    image.loadImages(app)
     app.clues=[]
-    app.clues_tofind=[app.candles,app.skull,app.chucky,app.clown]
-
+    app.roomsVisited=[]
+    app.roomsLeft=["room1","room2"]
+    
 def welcome_redrawAll(app):
     drawImage(app.bg,0,0,width=app.bgWidth,height=app.bgHeight)
     drawRect(app.width//2,app.height//2-100,app.width,100,fill='black', align='center')
@@ -77,7 +86,7 @@ def instructions_redrawAll(app):
 
 def instructions_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
-        app.callingForMap="floor1"
+        app.callingForMap="whereToGo"
         setActiveScreen('map')
 
 #________________________________________________
@@ -106,35 +115,57 @@ def map_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
         setActiveScreen(app.callingForMap)
 #__________________________________________________
-def floor1_onAppStart(app):
-    floor1.onAppStart(app)
+
+def whereToGo_redrawAll(app):
+    drawRect(0,0,app.width,app.height,fill='black')
+    drawLabel("Where would you like to go?",app.width//2,150,fill='white')
+    drawRect(app.width//2,250,200,100,fill='black',align='center')
+    drawLabel("Floor 1",app.width//2,350,fill='white',font='monospace')
+    drawRect(app.width//2,450,200,100,fill='black',align='center')
+    drawLabel("Floor 2",app.width//2,450,fill='white',font='monospace')
+    
+def whereToGo_onMousePress(app,mouseX,mouseY):
+    if app.width//2-100<=mouseX<=app.width//2+100 and 350-50<=mouseY<=350+50:
+        if "room1" not in app.roomsVisited or "room2" not in app.roomsVisited:
+            setActiveScreen("floor1")
+#__________________________________________________
 def floor1_redrawAll(app):
     floor1.redrawAll(app)
+    drawOptions(app)
+    drawSidePanel(app)
 def floor1_onMousePress(app,mouseX,mouseY):
     room=floor1.onMousePress(app,mouseX,mouseY)
     if room!=None:
         setActiveScreen(room)
+    sidePanelClick(app,mouseX,mouseY)
+    if distance(mouseX,mouseY,40,110)<=30:
+        app.callingForMap="floor1"
+        setActiveScreen("map")
 #__________________________________________________
-def door1_onAppStart(app):
+def corridor1_onAppStart(app):
     doors.features(app)
     
-def door1_redrawAll(app):
+def corridor1_redrawAll(app):
     doors.redrawAll(app)
     drawOptions(app)
     drawSidePanel(app)
     
-def door1_onMousePress(app,mouseX,mouseY):
+def corridor1_onMousePress(app,mouseX,mouseY):
     doors.click(mouseX,mouseY)
     sidePanelClick(app,mouseX,mouseY)
     if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="door1"
+        app.callingForMap="corridor1"
         setActiveScreen("map")
-    if app.flag==3:
+    if app.flag==2:
         setActiveScreen("room1")
+    if app.flag2==2:
+        setActiveScreen("over")
     
 #_______________________________________________
 def room1_onAppStart(app):
+    
     Room1.clues(app)
+
     
 def room1_redrawAll(app):
     Room1.redrawAll(app)
@@ -142,7 +173,8 @@ def room1_redrawAll(app):
     drawSidePanel(app)
     if app.candles in app.clues:
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
-    
+    if app.candles in app.clues_tofind:
+        print("True")
     
 
 def room1_onMousePress(app,mouseX,mouseY):
@@ -153,8 +185,9 @@ def room1_onMousePress(app,mouseX,mouseY):
         app.callingForMap="room1"
         setActiveScreen("map")
     if app.candles in app.clues:
+        app.roomsVisited.append("room1")
         if inArrow(app,mouseX,mouseY):
-            setActiveScreen("floor1")
+            setActiveScreen("whereToGo")
 
 def room1_onKeyPress(app,key):
     Room1.onKeyPress(app,key)
@@ -198,8 +231,9 @@ def room2_onMousePress(app,mouseX,mouseY):
         app.callingForMap="room2"
         setActiveScreen("map")
     if app.skull in app.clues:
+        app.roomsVisited.append("room2")
         if inArrow(app,mouseX,mouseY):
-            setActiveScreen("floor1")
+            setActiveScreen("whereToGo")
 
 
 def room2_onKeyPress(app,key):

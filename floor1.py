@@ -14,18 +14,15 @@ from PIL import Image
 import os, pathlib
 import image
 
-def onAppStart(app):
-    app.height=750
-    app.width=1300
-    image.loadImages(app)
 def redrawAll(app):
     drawImage(app.floor1,0,0,width=app.width,height=app.height)
-    drawImage(app.redArrow,app.width//2-40,app.height//2+250,width=40,height=40,align='center')
-    
-    drawImage(app.redArrow,app.width//2+120,app.height//2+250,width=40,height=40,rotateAngle=180,align='center')
+    if "room1" not in app.roomsVisited:
+        drawImage(app.redArrow,app.width//2-40,app.height//2+250,width=40,height=40,align='center')
+    if "room2" not in app.roomsVisited:
+        drawImage(app.redArrow,app.width//2+120,app.height//2+250,width=40,height=40,rotateAngle=180,align='center')
 
 def onMousePress(app,mouseX,mouseY):
-    if app.width//2-40-20<=mouseX<=app.width//2-40+20 and app.height//2+250-20<=mouseY<=app.height//2+250+20:
-        return "door1"
-    if app.width//2+120-20<=mouseX<=app.width//2+120+20 and app.height//2+250-20<=mouseY<=app.height//2+250+20:
+    if app.width//2-40-20<=mouseX<=app.width//2-40+20 and app.height//2+250-20<=mouseY<=app.height//2+250+20 and "room1" not in app.roomsVisited:
+        return "corridor1"
+    if app.width//2+120-20<=mouseX<=app.width//2+120+20 and app.height//2+250-20<=mouseY<=app.height//2+250+20 and "room2" not in app.roomsVisited:
         return "room2_intro"
