@@ -3,35 +3,33 @@ import random
 def onAppStart(app):
     app.height=750
     app.width=1300
-    app.cols=10
-    app.rows=15
-    app.board = [[False,True,True,True,True,False,False,False,False,False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [True, True, True, True, False, False, False, False, False, False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [False, False, False, False, False, True, True, True, True, True],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 [False, False,False,False,False,False,False,False,False,False],
-                 ]
-    app.boardLeft = 95
-    app.boardTop = 50
-    app.boardWidth = 210
-    app.boardHeight = 280
+    app.cols=40
+    app.rows=20
+    app.board=[([False]*app.cols)for row in range(app.rows)]
+    app.cy=app.rows-(app.rows-1)%4
+    print(app.cy)
+    app.cx=0
+    for x in range(1,app.rows,4):
+        newRow=[]
+        ran=random.randint(0,app.cols//2)
+        ran2=random.randint(app.cols//2,app.cols-3)
+        ran=random.randint(min(ran,ran2),max(ran,ran2))
+        for col in range(app.cols):
+            if col==ran or col==ran+1 or col==ran+2:
+                app.cx=ran+1
+                newRow.append(True)
+            else:
+                newRow.append(False)
+        app.board[x]=newRow
+    app.boardLeft = 0
+    app.boardTop = 0
+    app.boardWidth = app.width
+    app.boardHeight = app.height
     app.cellBorderWidth = 2
     app.cellWidth= app.boardWidth//app.cols
     app.cellHeight=app.boardHeight//app.rows
     app.pieceColor='white'
     
-
-
 def drawBoard(app):
     for row in range(app.rows):
         for col in range(app.cols):
@@ -70,7 +68,17 @@ def getCellSize(app):
 def redrawAll(app):
     drawBoardBorder(app)
     drawBoard(app)
+    drawCircle((app.cx+1)*app.cellWidth,(app.cy)*app.cellHeight,10,fill='red')
 
+def onKeyPress(app,key):
+    if key=="up":
+        app.cy-=1
+    if key=="down":
+        app.cy+=1
+    if key=="left":
+        app.cx-=1
+    if key=='right':
+        app.cx+=1
 def main():
     runApp()
 
