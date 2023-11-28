@@ -117,17 +117,35 @@ def map_onMousePress(app,mouseX,mouseY):
 #__________________________________________________
 
 def whereToGo_redrawAll(app):
+    if "room1" not in app.roomsVisited or "room2" not in app.roomsVisited:
+        floor1Color="white"
+    else:
+        floor1Color="grey"
+    if app.clues_tofind == app.clues:
+        atticColor="white"
+    else:
+        atticColor="grey"
     drawRect(0,0,app.width,app.height,fill='black')
     drawLabel("Where would you like to go?",app.width//2,150,fill='white')
-    drawRect(app.width//2,250,200,100,fill='black',align='center')
-    drawLabel("Floor 1",app.width//2,350,fill='white',font='monospace')
-    drawRect(app.width//2,450,200,100,fill='black',align='center')
-    drawLabel("Floor 2",app.width//2,450,fill='white',font='monospace')
+    drawRect(app.width//2,250,200,100,fill=floor1Color,align='center',border='black')
+    drawLabel("Floor 1",app.width//2,250,fill='black',font='monospace')
+    drawRect(app.width//2,350,200,100,fill='white',align='center',border='black')
+    drawLabel("Floor 2",app.width//2,350,fill='black',font='monospace')
+    drawRect(app.width//2,450,200,100,fill=atticColor,align='center',border='black')
+    drawLabel("Attic",app.width//2,450,fill='black',font='monospace')
+
+    
     
 def whereToGo_onMousePress(app,mouseX,mouseY):
-    if app.width//2-100<=mouseX<=app.width//2+100 and 350-50<=mouseY<=350+50:
-        if "room1" not in app.roomsVisited or "room2" not in app.roomsVisited:
+    if app.width//2-100<=mouseX<=app.width//2+100 and 250-50<=mouseY<=250+50:
+        if "room1" not in app.roomsVisited or "room2" not in app.roomsVisited or "room3" not in app.roomsVisited:
             setActiveScreen("floor1")
+    if app.width//2-100<=mouseX<=app.width//2+100 and 350-50<=mouseY<=350+50:
+        if "room4" not in app.roomsVisited:
+            setActiveScreen("over")
+    if app.width//2-100<=mouseX<=app.width//2+100 and 450-50<=mouseY<=450+50:
+        if app.clues_tofind == app.clues:
+            setActiveScreen("over")
 #__________________________________________________
 def floor1_redrawAll(app):
     floor1.redrawAll(app)

@@ -16,7 +16,7 @@ import image
 
 def redrawAll(app):
     drawImage(app.floor1,0,0,width=app.width,height=app.height)
-    if "room1" not in app.roomsVisited:
+    if "room1" not in app.roomsVisited or "room3" not in app.roomsVisited:
         drawImage(app.redArrow,app.width//2-40,app.height//2+250,width=40,height=40,align='center')
     if "room2" not in app.roomsVisited:
         drawImage(app.redArrow,app.width//2+120,app.height//2+250,width=40,height=40,rotateAngle=180,align='center')
