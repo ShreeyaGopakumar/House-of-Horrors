@@ -82,6 +82,9 @@ def loadImages(app):
 
     app.redArrow=openImage("images/redArrow.png")
     app.redArrow=CMUImage(app.redArrow)
+    
+    app.floor2=openImage("images/floor2.png")
+    app.floor2=CMUImage(app.floor2)
     #___________________________________________________________________________
     '''Images used:
     Background: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/

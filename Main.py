@@ -5,6 +5,7 @@ import doors
 import Room1
 import Room2
 import floor1
+import floor2
 import image
 def drawSidePanel(app):
     if app.sidePanel:
@@ -142,7 +143,7 @@ def whereToGo_onMousePress(app,mouseX,mouseY):
             setActiveScreen("floor1")
     if app.width//2-100<=mouseX<=app.width//2+100 and 350-50<=mouseY<=350+50:
         if "room4" not in app.roomsVisited:
-            setActiveScreen("over")
+            setActiveScreen("floor2")
     if app.width//2-100<=mouseX<=app.width//2+100 and 450-50<=mouseY<=450+50:
         if app.clues_tofind == app.clues:
             setActiveScreen("over")
@@ -256,6 +257,22 @@ def room2_onMousePress(app,mouseX,mouseY):
 
 def room2_onKeyPress(app,key):
     Room2.onKeyPress(app,key)
+#_______________________________________________
+def floor2_redrawAll(app):
+    floor2.redrawAll(app)
+    drawOptions(app)
+    drawSidePanel(app)
+def floor2_onMousePress(app,mouseX,mouseY):
+    room=floor2.onMousePress(app,mouseX,mouseY)
+    if room!=None:
+        setActiveScreen("over")
+    sidePanelClick(app,mouseX,mouseY)
+    if distance(mouseX,mouseY,40,110)<=30:
+        app.callingForMap="floor2"
+        setActiveScreen("map")
+#_______________________________________________
+
+
 #_______________________________________________
 def over_redrawAll(app):
     #drawRect(0,0,app.width,app.height,fill='black')
