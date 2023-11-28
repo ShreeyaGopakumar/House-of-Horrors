@@ -11,8 +11,8 @@ def features(app):
 def redrawAll(app):
     drawRect(0,0,app.width,app.height,fill='grey')
     drawRect(0,0,app.width,100,fill='white')
-    drawLabel("ONE DOOR LEADS TO A STUDY, ONE DOOR LEADS TO A SCARE, ANOTHER LEADS TO A MASK",app.width//2,20,font="monospace",size=30,fill='maroon')
-    drawLabel("CHOOSE THE RIGHT DOOR IF YOU DARE!",app.width//2,60,font="monospace",size=30,fill='maroon')
+    drawLabel("ONE DOOR LEADS TO A STUDY, ONE DOOR LEADS TO A SCARE, ANOTHER LEADS TO A MASK",app.width//2,20,font="monospace",size=20,fill='maroon')
+    drawLabel("CHOOSE THE RIGHT DOOR IF YOU DARE!",app.width//2,60,font="monospace",size=20,fill='maroon')
     if not app.MdoorOpen:
         drawImage(app.door1,app.width//2,app.height//2,width=app.door1Width,height=app.door1Height,align='center')
     

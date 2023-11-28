@@ -134,7 +134,8 @@ def whereToGo_redrawAll(app):
     drawLabel("Floor 2",app.width//2,350,fill='black',font='monospace')
     drawRect(app.width//2,450,200,100,fill=atticColor,align='center',border='black')
     drawLabel("Attic",app.width//2,450,fill='black',font='monospace')
-
+    drawOptions(app)
+    drawSidePanel(app)
     
     
 def whereToGo_onMousePress(app,mouseX,mouseY):
@@ -147,6 +148,10 @@ def whereToGo_onMousePress(app,mouseX,mouseY):
     if app.width//2-100<=mouseX<=app.width//2+100 and 450-50<=mouseY<=450+50:
         if app.clues_tofind == app.clues:
             setActiveScreen("over")
+    sidePanelClick(app,mouseX,mouseY)
+    if distance(mouseX,mouseY,40,110)<=30:
+        app.callingForMap="whereToGo"
+        setActiveScreen("map")
 #__________________________________________________
 def floor1_redrawAll(app):
     floor1.redrawAll(app)
@@ -178,7 +183,7 @@ def corridor1_onMousePress(app,mouseX,mouseY):
     if app.flag==2:
         setActiveScreen("room1")
     if app.flag2==2:
-        setActiveScreen("over")
+        setActiveScreen("room3")
     
 #_______________________________________________
 def room1_onAppStart(app):
@@ -271,7 +276,14 @@ def floor2_onMousePress(app,mouseX,mouseY):
         app.callingForMap="floor2"
         setActiveScreen("map")
 #_______________________________________________
-
+def room3_redrawAll(app):
+    drawOptions(app)
+    drawSidePanel(app)
+def room3_onMousePress(app,mouseX,mouseY):
+    sidePanelClick(app,mouseX,mouseY)
+    if distance(mouseX,mouseY,40,110)<=30:
+        app.callingForMap="room3"
+        setActiveScreen("map")
 
 #_______________________________________________
 def over_redrawAll(app):
