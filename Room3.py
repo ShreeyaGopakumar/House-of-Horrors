@@ -18,10 +18,6 @@ def redrawAll(app):
             if app.showMask:
                 drawImage(app.room3_frame4,0,0,width=app.width,height=app.height)
             
-    drawLine(0,280,app.width,280,fill='pink')
-    drawLine(0,320,app.width,320,fill='pink')
-    drawLine(app.width-165,0,app.width-165,app.height,fill='pink')
-    drawLine(app.width-125,0,app.width-125,app.height,fill='pink')
 def onMousePress(app,mouseX,mouseY):
     if 620<=mouseY<=650 and app.width-70<=mouseX<=app.width-40 and app.showBox:
         app.showBox=False

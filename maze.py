@@ -1,7 +1,6 @@
 from cmu_graphics import*
-
-
-
+from PIL import Image
+import os, pathlib
 def redrawAll(app):
     drawMaze(app)    
 def drawMaze(app):
@@ -17,7 +16,7 @@ def drawMaze(app):
             if character=="A" or character=="B" or character=="C" or character=="D":
                 drawRect(300+x*75,y*75,75,75,fill='brown')
             if y==app.playerY and x==app.playerX:
-                drawRect(300+x*75,y*75,75,75,fill='blue')
+                drawImage(app.player,300+x*75,y*75,width=75,height=75)
 def onKeyPress(app,key):
     if key=="up":
         if app.maze[app.playerY-1][app.playerX]==" ":

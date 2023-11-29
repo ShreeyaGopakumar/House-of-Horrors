@@ -97,8 +97,8 @@ def loadImages(app):
 
     app.room3_frame4=openImage("images/room3_frame5.png")
     app.room3_frame4=CMUImage(app.room3_frame4)
-
-    
+    app.player=openImage("images/player.png")
+    app.player=CMUImage(app.player)
     
     
     #___________________________________________________________________________
