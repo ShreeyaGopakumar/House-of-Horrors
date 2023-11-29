@@ -35,4 +35,5 @@ def click(mouseX,mouseY):
         app.clues.append(app.candles)
     
 def onKeyPress(app,key):
-    block_puzzle.click(app,key)
+    if app.blockPuzzle:
+        block_puzzle.click(app,key)

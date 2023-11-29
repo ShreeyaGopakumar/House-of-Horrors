@@ -1,19 +1,6 @@
 from cmu_graphics import*
 
-def onAppStart(app):
-    app.width=1300
-    app.height=750
-    app.playerX=0
-    app.playerY=1
-    app.maze=["XXXXXXXXX",
-                "  X     X",
-                "X X XXX X",
-                "X  C  X X",
-                "X XXX X X",
-                "X A  BX X",
-                "X XXXXX X",
-                "X XD    X",
-                "XXXXXXX  "]
+
 
 def redrawAll(app):
     drawMaze(app)    
@@ -31,21 +18,53 @@ def onKeyPress(app,key):
     if key=="up":
         if app.maze[app.playerY-1][app.playerX]==" ":
             app.playerY-=1
+        elif app.maze[app.playerY-1][app.playerX]=="A":
+            app.playerY-=1
+            return "corridor1"
+        elif app.maze[app.playerY-1][app.playerX]=="B":
+            app.playerY-=1
+            return "room2_intro"
+        elif app.maze[app.playerY-1][app.playerX]=="C":
+            app.playerY-=1
+            return "room3"
+        
     if key=="down":
         if app.maze[app.playerY+1][app.playerX]==" ":
             app.playerY+=1
+        elif app.maze[app.playerY+1][app.playerX]=="A":
+            app.playerY+=1
+            return "corridor1"
+        elif app.maze[app.playerY+1][app.playerX]=="B":
+            app.playerY+=1
+            return "room2_intro"
+        elif app.maze[app.playerY+1][app.playerX]=="C":
+            app.playerY+=1
+            return "room3"
     if key=="left":
         if app.maze[app.playerY][app.playerX-1]==" ":
             app.playerX-=1
+        elif app.maze[app.playerY][app.playerX-1]=="A":
+            app.playerX-=1
+            return "corridor1"
+        elif app.maze[app.playerY][app.playerX-1]=="B":
+            app.playerX-=1
+            return "room2_intro"
+        elif app.maze[app.playerY][app.playerX-1]=="C":
+            app.playerX-=1
+            return "room3"
+        
     if key=="right":
         if app.maze[app.playerY][app.playerX+1]==" ":
             app.playerX+=1
-    
+        elif app.maze[app.playerY][app.playerX+1]=="A":
+            app.playerX+=1
+            return "corridor1"
+        elif app.maze[app.playerY][app.playerX+1]=="B":
+            app.playerX+=1
+            return "room2_intro"
+        elif app.maze[app.playerY][app.playerX+1]=="C":
+            app.playerX+=1
+            return "room3"
+        
 
-
-
-def main():
-    runApp()
-
-main()
-                
+     

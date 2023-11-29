@@ -8,6 +8,7 @@ import floor1
 import floor2
 import image
 import Room3
+import maze
 def drawSidePanel(app):
     if app.sidePanel:
         drawRect(0,0,150,app.height,fill='black',border="white")
@@ -30,8 +31,7 @@ def sidePanelClick(app,mouseX,mouseY):
 def drawOptions(app):
     drawCircle(40,40,30,fill='black',border='white')
     drawLabel("CLUES",40,40,fill='white',font='monospace')
-    drawCircle(40,110,30,fill='black',border='white')
-    drawLabel("*",40,110,fill='white',font='monospace',size=30)
+  
 
 #def onAppStart(app):
 #    image.loadImages(app)
@@ -51,6 +51,17 @@ def welcome_onAppStart(app):
     app.clues=[]
     app.roomsVisited=[]
     app.roomsLeft=["room1","room2"]
+    app.playerX=0
+    app.playerY=1
+    app.maze=["XXXXXXXXX",
+                "  X     X",
+                "X XXXXX X",
+                "X  C  X X",
+                "X XXX X X",
+                "X A  BX X",
+                "X XXXXX X",
+                "X XD    X",
+                "XXXXXXX  "]
     
 def welcome_redrawAll(app):
     drawImage(app.bg,0,0,width=app.bgWidth,height=app.bgHeight)
@@ -88,11 +99,10 @@ def instructions_redrawAll(app):
 
 def instructions_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
-        app.callingForMap="whereToGo"
-        setActiveScreen('map')
+        setActiveScreen('maze')
 
 #________________________________________________
-def map_redrawAll(app):
+'''def map_redrawAll(app):
     #drawRect(0,0,app.width,app.height,fill='black')
     #crossed_distance=50
     #for x in range(len(app.clues_tofind)):
@@ -115,9 +125,9 @@ def map_redrawAll(app):
 
 def map_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
-        setActiveScreen(app.callingForMap)
+        setActiveScreen(app.callingForMap)'''
 #__________________________________________________
-
+'''
 def whereToGo_redrawAll(app):
     if "room1" not in app.roomsVisited or "room2" not in app.roomsVisited:
         floor1Color="white"
@@ -151,8 +161,8 @@ def whereToGo_onMousePress(app,mouseX,mouseY):
             setActiveScreen("over")
     sidePanelClick(app,mouseX,mouseY)
     if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="whereToGo"
-        setActiveScreen("map")
+        app.callingForMaze="whereToGo"
+        setActiveScreen("map")'''
 #__________________________________________________
 def floor1_redrawAll(app):
     floor1.redrawAll(app)
@@ -163,9 +173,9 @@ def floor1_onMousePress(app,mouseX,mouseY):
     if room!=None:
         setActiveScreen(room)
     sidePanelClick(app,mouseX,mouseY)
-    if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="floor1"
-        setActiveScreen("map")
+    #if distance(mouseX,mouseY,40,110)<=30:
+    #    app.callingForMaze="floor1"
+    #    setActiveScreen("maze")
 #__________________________________________________
 def corridor1_onAppStart(app):
     doors.features(app)
@@ -178,13 +188,12 @@ def corridor1_redrawAll(app):
 def corridor1_onMousePress(app,mouseX,mouseY):
     doors.click(mouseX,mouseY)
     sidePanelClick(app,mouseX,mouseY)
-    if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="corridor1"
-        setActiveScreen("map")
+    #if distance(mouseX,mouseY,40,110)<=30:
+    #    app.callingForMaze="corridor1"
+    #    setActiveScreen("maze")
     if app.flag==2:
         setActiveScreen("room1")
-    if app.flag2==2:
-        setActiveScreen("room3")
+    
     
 #_______________________________________________
 def room1_onAppStart(app):
@@ -206,13 +215,12 @@ def room1_onMousePress(app,mouseX,mouseY):
     Room1.click(mouseX,mouseY)
     
     sidePanelClick(app,mouseX,mouseY)
-    if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="room1"
-        setActiveScreen("map")
+    
     if app.candles in app.clues:
         app.roomsVisited.append("room1")
         if inArrow(app,mouseX,mouseY):
-            setActiveScreen("whereToGo")
+            app.maze[app.playerY]=app.maze[app.playerY][0:app.playerX]+" "+app.maze[app.playerY][app.playerX+1:]
+            setActiveScreen("maze")
 
 def room1_onKeyPress(app,key):
     Room1.onKeyPress(app,key)
@@ -229,9 +237,7 @@ def room2_intro_redrawAll(app):
 
 def room2_intro_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
-    if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="room2_intro"
-        setActiveScreen("map")
+    
     if inArrow(app,mouseX,mouseY):
             setActiveScreen("room2")
 
@@ -252,19 +258,22 @@ def room2_redrawAll(app):
 def room2_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
     Room2.click(mouseX,mouseY)
-    if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="room2"
-        setActiveScreen("map")
     if app.skull in app.clues:
         app.roomsVisited.append("room2")
         if inArrow(app,mouseX,mouseY):
-            setActiveScreen("whereToGo")
+            newRow=[]
+            for y in range(len(app.maze)):
+                if y==app.playerX:
+                    i=app.maze[y].index("B")
+                    newRow=[app.maze[y][0:i]+" "+app.maze[y][i+1:]]
+            app.maze=app.maze[0:app.playerY]+newRow+app.maze[app.playerY+1:]
+            setActiveScreen("maze")
 
 
 def room2_onKeyPress(app,key):
     Room2.onKeyPress(app,key)
 #_______________________________________________
-def floor2_redrawAll(app):
+'''def floor2_redrawAll(app):
     floor2.redrawAll(app)
     drawOptions(app)
     drawSidePanel(app)
@@ -275,7 +284,7 @@ def floor2_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
     if distance(mouseX,mouseY,40,110)<=30:
         app.callingForMap="floor2"
-        setActiveScreen("map")
+        setActiveScreen("map")'''
 #_______________________________________________
 def room3_onAppStart(app):
     Room3.features(app)
@@ -286,9 +295,26 @@ def room3_redrawAll(app):
 def room3_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
     Room3.onMousePress(app,mouseX,mouseY)
-    if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="room3"
-        setActiveScreen("map")
+    if app.clown in app.clues:
+        app.roomsVisited.append("room3")
+        if inArrow(app,mouseX,mouseY):
+            if "room1" and "room2" in app.roomsVisited:
+                app.maze[app.playerY]=app.maze[app.playerY][0:app.playerX+1]+" "+app.maze[app.playerY][app.playerX+2:]
+            app.maze[app.playerY]=app.maze[app.playerY][0:app.playerX]+" "+app.maze[app.playerY][app.playerX+1:]
+            setActiveScreen("maze")
+
+    
+
+#_______________________________________________
+
+
+def maze_redrawAll(app):
+    maze.redrawAll(app)
+
+def maze_onKeyPress(app,key):
+    r=maze.onKeyPress(app,key)
+    if r!=None:
+        setActiveScreen(r)
 
 #_______________________________________________
 def over_redrawAll(app):
