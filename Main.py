@@ -44,24 +44,15 @@ def drawOptions(app):
     
 def welcome_onAppStart(app):
     image.loadImages(app)
-    app.clues_tofind=[app.candles,app.skull,app.chucky,app.clown]
+    app.clues_tofind=[app.candles,app.skull,app.clown]
     app.sidePanel=False
     app.width=1300
     app.height=750
     app.clues=[]
     app.roomsVisited=[]
     app.roomsLeft=["room1","room2"]
-    app.playerX=0
-    app.playerY=1
-    app.maze=["XXXXXXXXX",
-                "  X     X",
-                "X XXXXX X",
-                "X  C  X X",
-                "X XXX X X",
-                "X A  BX X",
-                "X XXXXX X",
-                "X XD    X",
-                "XXXXXXXXX"]
+    
+    
     
 def welcome_redrawAll(app):
     drawImage(app.bg,0,0,width=app.bgWidth,height=app.bgHeight)
@@ -218,7 +209,7 @@ def room1_onMousePress(app,mouseX,mouseY):
     if app.candles in app.clues:
         app.roomsVisited.append("room1")
         if inArrow(app,mouseX,mouseY):
-            app.maze[app.playerY]=app.maze[app.playerY][0:app.playerX]+" "+app.maze[app.playerY][app.playerX+1:]
+            app.maze[app.playerX][app.playerY]='c'
             setActiveScreen("maze")
 
 def room1_onKeyPress(app,key):
@@ -260,12 +251,7 @@ def room2_onMousePress(app,mouseX,mouseY):
     if app.skull in app.clues:
         app.roomsVisited.append("room2")
         if inArrow(app,mouseX,mouseY):
-            newRow=[]
-            for y in range(len(app.maze)):
-                if y==app.playerX:
-                    i=app.maze[y].index("B")
-                    newRow=[app.maze[y][0:i]+" "+app.maze[y][i+1:]]
-            app.maze=app.maze[0:app.playerY]+newRow+app.maze[app.playerY+1:]
+            app.maze[app.playerX][app.playerY]='c'
             setActiveScreen("maze")
 
 
@@ -300,21 +286,28 @@ def room3_onMousePress(app,mouseX,mouseY):
     if app.clown in app.clues:
         app.roomsVisited.append("room3")
         if inArrow(app,mouseX,mouseY):
-            app.maze[app.playerY]=app.maze[app.playerY][0:app.playerX]+" "+app.maze[app.playerY][app.playerX+1:]
+            app.maze[app.playerX][app.playerY]='c'
             setActiveScreen("maze")
 
     
 
 #_______________________________________________
-
+def maze_onAppStart(app):
+    maze.features(app)
 
 def maze_redrawAll(app):
-    maze.redrawAll(app)
 
+    maze.printMaze(app)
+    drawOptions(app)
+    drawSidePanel(app)
+
+def maze_onMousePress(app,mouseX,mouseY):
+    sidePanelClick(app,mouseX,mouseY)
 def maze_onKeyPress(app,key):
     r=maze.onKeyPress(app,key)
     if r!=None:
         setActiveScreen(r)
+    
 
 #_______________________________________________
 def over_redrawAll(app):
