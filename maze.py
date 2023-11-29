@@ -5,9 +5,13 @@ from cmu_graphics import*
 def redrawAll(app):
     drawMaze(app)    
 def drawMaze(app):
-    for y in range (len(app.maze)):
-        for x in range(len(app.maze[0])):
-            character=app.maze[y][x]
+    maze=app.maze
+    if "room1" in app.roomsVisited and "room2" in app.roomsVisited:
+        maze[2]="X X XXX X"
+            
+    for y in range (len(maze)):
+        for x in range(len(maze[0])):
+            character=maze[y][x]
             if character=="X":
                 drawRect(300+x*75,y*75,75,75,fill='black')
             if character=="A" or character=="B" or character=="C" or character=="D":

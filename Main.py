@@ -61,7 +61,7 @@ def welcome_onAppStart(app):
                 "X A  BX X",
                 "X XXXXX X",
                 "X XD    X",
-                "XXXXXXX  "]
+                "XXXXXXXXX"]
     
 def welcome_redrawAll(app):
     drawImage(app.bg,0,0,width=app.bgWidth,height=app.bgHeight)
@@ -207,8 +207,7 @@ def room1_redrawAll(app):
     drawSidePanel(app)
     if app.candles in app.clues:
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
-    if app.candles in app.clues_tofind:
-        print("True")
+    
     
 
 def room1_onMousePress(app,mouseX,mouseY):
@@ -292,14 +291,15 @@ def room3_redrawAll(app):
     Room3.redrawAll(app)
     drawOptions(app)
     drawSidePanel(app)
+    if app.clown in app.clues:
+        drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
+    
 def room3_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
     Room3.onMousePress(app,mouseX,mouseY)
     if app.clown in app.clues:
         app.roomsVisited.append("room3")
         if inArrow(app,mouseX,mouseY):
-            if "room1" and "room2" in app.roomsVisited:
-                app.maze[app.playerY]=app.maze[app.playerY][0:app.playerX+1]+" "+app.maze[app.playerY][app.playerX+2:]
             app.maze[app.playerY]=app.maze[app.playerY][0:app.playerX]+" "+app.maze[app.playerY][app.playerX+1:]
             setActiveScreen("maze")
 

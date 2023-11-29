@@ -95,8 +95,8 @@ def loadImages(app):
     app.room3_frame3=openImage("images/room3_frame3.png")
     app.room3_frame3=CMUImage(app.room3_frame3)
 
-    #app.room3_frame4=openImage("images/room3_frame4.png")
-    #app.room3_frame4=CMUImage(app.room3_frame4)
+    app.room3_frame4=openImage("images/room3_frame5.png")
+    app.room3_frame4=CMUImage(app.room3_frame4)
 
     
     
