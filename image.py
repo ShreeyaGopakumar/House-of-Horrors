@@ -101,7 +101,8 @@ def loadImages(app):
     app.player=CMUImage(app.player)
     app.key=openImage("images/key.png")
     app.key=CMUImage(app.key)
-    
+    app.door=openImage("images/door.png")
+    app.door=CMUImage(app.door)
     
     #___________________________________________________________________________
     '''Images used:

@@ -4,8 +4,6 @@ import os, pathlib
 import doors
 import Room1
 import Room2
-import floor1
-import floor2
 import image
 import Room3
 import maze
@@ -32,16 +30,7 @@ def drawOptions(app):
     drawCircle(40,40,30,fill='black',border='white')
     drawLabel("CLUES",40,40,fill='white',font='monospace')
   
-
-#def onAppStart(app):
-#    image.loadImages(app)
-#    app.clues_tofind=[app.candles,app.skull,app.chucky,app.clown]
-#    app.sidePanel=False
-#    app.width=1300
-#    app.height=750
-#    
-#    app.clues=[]
-    
+#_________________________________________________________  
 def welcome_onAppStart(app):
     image.loadImages(app)
     app.clues_tofind=[app.candles,app.skull,app.clown]
@@ -49,8 +38,6 @@ def welcome_onAppStart(app):
     app.width=1300
     app.height=750
     app.clues=[]
-    app.roomsVisited=[]
-    app.roomsLeft=["room1","room2"]
     
     
     
@@ -93,81 +80,6 @@ def instructions_onMousePress(app,mouseX,mouseY):
         setActiveScreen('maze')
 
 #________________________________________________
-'''def map_redrawAll(app):
-    #drawRect(0,0,app.width,app.height,fill='black')
-    #crossed_distance=50
-    #for x in range(len(app.clues_tofind)):
-    #    if app.clues_tofind[x] in app.clues:
-    #        drawImage(app.clues[x],crossed_distance+20,app.height//2-140,width=100,height=140)
-    #        drawImage(app.tick,crossed_distance+70,app.height//2+20,width=40,height=40,align='center')
-    #        
-    #    else:
-    #        drawImage(app.clues_tofind[x],crossed_distance+20,app.height//2-140,width=100,height=140,opacity=50)
-    #    crossed_distance+=250
-    
-
-        
-    #drawLabel("PROGRESS",app.width//2,40,fill='white', size=80, font='monospace')
-    #drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
-    drawImage(app.map,app.width//2,app.height//2,width=app.width,height=app.height-10,align='center')
-    drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
-        
-
-
-def map_onMousePress(app,mouseX,mouseY):
-    if inArrow(app,mouseX,mouseY):
-        setActiveScreen(app.callingForMap)'''
-#__________________________________________________
-'''
-def whereToGo_redrawAll(app):
-    if "room1" not in app.roomsVisited or "room2" not in app.roomsVisited:
-        floor1Color="white"
-    else:
-        floor1Color="grey"
-    if app.clues_tofind == app.clues:
-        atticColor="white"
-    else:
-        atticColor="grey"
-    drawRect(0,0,app.width,app.height,fill='black')
-    drawLabel("Where would you like to go?",app.width//2,150,fill='white')
-    drawRect(app.width//2,250,200,100,fill=floor1Color,align='center',border='black')
-    drawLabel("Floor 1",app.width//2,250,fill='black',font='monospace')
-    drawRect(app.width//2,350,200,100,fill='white',align='center',border='black')
-    drawLabel("Floor 2",app.width//2,350,fill='black',font='monospace')
-    drawRect(app.width//2,450,200,100,fill=atticColor,align='center',border='black')
-    drawLabel("Attic",app.width//2,450,fill='black',font='monospace')
-    drawOptions(app)
-    drawSidePanel(app)
-    
-    
-def whereToGo_onMousePress(app,mouseX,mouseY):
-    if app.width//2-100<=mouseX<=app.width//2+100 and 250-50<=mouseY<=250+50:
-        if "room1" not in app.roomsVisited or "room2" not in app.roomsVisited or "room3" not in app.roomsVisited:
-            setActiveScreen("floor1")
-    if app.width//2-100<=mouseX<=app.width//2+100 and 350-50<=mouseY<=350+50:
-        if "room4" not in app.roomsVisited:
-            setActiveScreen("floor2")
-    if app.width//2-100<=mouseX<=app.width//2+100 and 450-50<=mouseY<=450+50:
-        if app.clues_tofind == app.clues:
-            setActiveScreen("over")
-    sidePanelClick(app,mouseX,mouseY)
-    if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMaze="whereToGo"
-        setActiveScreen("map")'''
-#__________________________________________________
-def floor1_redrawAll(app):
-    floor1.redrawAll(app)
-    drawOptions(app)
-    drawSidePanel(app)
-def floor1_onMousePress(app,mouseX,mouseY):
-    room=floor1.onMousePress(app,mouseX,mouseY)
-    if room!=None:
-        setActiveScreen(room)
-    sidePanelClick(app,mouseX,mouseY)
-    #if distance(mouseX,mouseY,40,110)<=30:
-    #    app.callingForMaze="floor1"
-    #    setActiveScreen("maze")
-#__________________________________________________
 def corridor1_onAppStart(app):
     doors.features(app)
     
@@ -179,9 +91,6 @@ def corridor1_redrawAll(app):
 def corridor1_onMousePress(app,mouseX,mouseY):
     doors.click(mouseX,mouseY)
     sidePanelClick(app,mouseX,mouseY)
-    #if distance(mouseX,mouseY,40,110)<=30:
-    #    app.callingForMaze="corridor1"
-    #    setActiveScreen("maze")
     if app.flag==2:
         setActiveScreen("room1")
     
@@ -258,19 +167,7 @@ def room2_onMousePress(app,mouseX,mouseY):
 def room2_onKeyPress(app,key):
     Room2.onKeyPress(app,key)
 #_______________________________________________
-'''def floor2_redrawAll(app):
-    floor2.redrawAll(app)
-    drawOptions(app)
-    drawSidePanel(app)
-def floor2_onMousePress(app,mouseX,mouseY):
-    room=floor2.onMousePress(app,mouseX,mouseY)
-    if room!=None:
-        setActiveScreen("over")
-    sidePanelClick(app,mouseX,mouseY)
-    if distance(mouseX,mouseY,40,110)<=30:
-        app.callingForMap="floor2"
-        setActiveScreen("map")'''
-#_______________________________________________
+
 def room3_onAppStart(app):
     Room3.features(app)
 def room3_redrawAll(app):
@@ -288,8 +185,6 @@ def room3_onMousePress(app,mouseX,mouseY):
         if inArrow(app,mouseX,mouseY):
             app.maze[app.playerX][app.playerY]='c'
             setActiveScreen("maze")
-
-    
 
 #_______________________________________________
 def maze_onAppStart(app):
@@ -311,9 +206,6 @@ def maze_onKeyPress(app,key):
 
 #_______________________________________________
 def over_redrawAll(app):
-    #drawRect(0,0,app.width,app.height,fill='black')
-    #drawRect(app.width//2-100,app.height//2+100,200,50,fill='black',border='white')
-    #drawLabel("YOU WON!",app.width//2,app.height//2+125,fill="white",font="monospace",size=25)
     drawImage(app.over,0,0,width=app.width,height=app.height)
 #________________________________________________
 def main():
