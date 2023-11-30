@@ -1,8 +1,6 @@
 from cmu_graphics import *
 import block_puzzle
 def clues(app):
-    app.room1clues_tofind=["clock"]
-    app.room1clues_found=[]
     app.drawerOpen=False
     app.keyFound=False
     app.blockPuzzle=False
@@ -28,7 +26,6 @@ def click(mouseX,mouseY):
     if 200<=mouseX<=200+50 and app.height//2+100<=mouseY<=app.height//2+100+30:
         app.blockPuzzle=True
     if app.clock:
-        app.room1clues_found.append("clock")
         if 1090<=mouseX<=1275 and 110<=mouseY<=app.height//2+10:
             app.drawerOpen=True
     if 250-15<=mouseX<=250+15 and 600-25<=mouseY<=600+25 and app.candles not in app.clues and app.clock:
