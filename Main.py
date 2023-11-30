@@ -38,7 +38,7 @@ def welcome_onAppStart(app):
     app.width=1300
     app.height=750
     app.clues=[]
-    
+    app.roomsVisited=[]
     
     
 def welcome_redrawAll(app):

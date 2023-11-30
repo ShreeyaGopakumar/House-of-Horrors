@@ -9,7 +9,7 @@ def loadImages(app):
     app.bgWidth,app.bgHeight = app.width,app.height
     app.bg = CMUImage(app.bg)
 
-    app.intro = openImage("images/intro.jpg")
+    app.intro = openImage("images/intro.png")
     app.introWidth,app.introHeight = app.width,app.height
     app.intro = CMUImage(app.intro)
 
@@ -31,9 +31,6 @@ def loadImages(app):
     app.chucky=openImage("images/chucky.png")
     app.chucky=CMUImage(app.chucky)
 
-    app.map = openImage("images/map.png")
-    app.map = CMUImage(app.map)
-    
     app.door1 = openImage("images/door1.png")
     app.door1Width,app.door1Height = app.door1.width,app.door1.height
     app.door1 = CMUImage(app.door1)
@@ -74,17 +71,7 @@ def loadImages(app):
     app.over=openImage("images/over.png")
     app.over=CMUImage(app.over)
 
-    app.altar=openImage("images/altar.png")
-    app.altar=CMUImage(app.altar)
-
-    app.floor1=openImage("images/floor1.jpg")
-    app.floor1=CMUImage(app.floor1)
-
-    app.redArrow=openImage("images/redArrow.png")
-    app.redArrow=CMUImage(app.redArrow)
     
-    app.floor2=openImage("images/floor2.png")
-    app.floor2=CMUImage(app.floor2)
 
     app.room3_frame1=openImage("images/room3_frame1.png")
     app.room3_frame1=CMUImage(app.room3_frame1)
