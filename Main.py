@@ -5,7 +5,8 @@ import doors
 import Room1
 import Room2
 import image
-import Room3
+#import Room3
+import game_3
 import maze
 def drawSidePanel(app):
     if app.sidePanel:
@@ -167,25 +168,30 @@ def room2_onMousePress(app,mouseX,mouseY):
 def room2_onKeyPress(app,key):
     Room2.onKeyPress(app,key)
 #_______________________________________________
-
 def room3_onAppStart(app):
-    Room3.features(app)
+    game_3.features(app)
 def room3_redrawAll(app):
-    Room3.redrawAll(app)
+    game_3.redrawAll(app)
     drawOptions(app)
     drawSidePanel(app)
+    if app.gameOver:
+        app.clues.append(app.clues)
     if app.clown in app.clues:
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
     
 def room3_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
-    Room3.onMousePress(app,mouseX,mouseY)
     if app.clown in app.clues:
         app.roomsVisited.append("room3")
         if inArrow(app,mouseX,mouseY):
             app.maze[app.playerX][app.playerY]='c'
             setActiveScreen("maze")
 
+def room3_onKeyPess(app,key):
+    game_3.onKeyPress(app,key)
+    
+def room3_onStep(app):
+    game_3.onStep(app)
 #_______________________________________________
 def maze_onAppStart(app):
     maze.features(app)

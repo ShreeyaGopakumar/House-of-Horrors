@@ -15,13 +15,18 @@ def loadImages(app):
 
     app.candles = openImage("images/candles.png")
     app.candles = CMUImage(app.candles)
-    
+    app.killerclown=openImage("images/killerclown.png")
+    app.killerclown=CMUImage(app.killerclown)
+    app.killerclown_2=openImage("images/killerclown_2.png")
+    app.killerclown_2=CMUImage(app.killerclown_2)
     app.clown = openImage("images/clown.png")
     app.clown = CMUImage(app.clown)
-    
+    app.bg2=openImage("images/bg_2.png")
+    app.bg2=CMUImage(app.bg2)
     app.scary = openImage("images/scary.png")
     app.scary = CMUImage(app.scary)
-    
+    app.heart=CMUImage("images/heart.jpg")
+    app.heart=CMUImage(app.heart)
     app.nun = openImage("images/nun.png")
     app.nun = CMUImage(app.nun)
     
