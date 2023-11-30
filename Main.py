@@ -40,7 +40,9 @@ def welcome_onAppStart(app):
     app.height=750
     app.clues=[]
     app.roomsVisited=[]
-    
+    app.gameOver2=False
+        
+        
     
 def welcome_redrawAll(app):
     drawImage(app.bg,0,0,width=app.bgWidth,height=app.bgHeight)
@@ -169,13 +171,13 @@ def room2_onKeyPress(app,key):
     Room2.onKeyPress(app,key)
 #_______________________________________________
 def room3_onAppStart(app):
-    game_3.features(app)
+    game_3.Points.features(app)
 def room3_redrawAll(app):
-    game_3.redrawAll(app)
+    game_3.Points.redrawAll(app)
     drawOptions(app)
     drawSidePanel(app)
-    if app.gameOver:
-        app.clues.append(app.clues)
+    if app.gameOver2:
+        app.clues.append(app.clown)
     if app.clown in app.clues:
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
     
@@ -187,11 +189,13 @@ def room3_onMousePress(app,mouseX,mouseY):
             app.maze[app.playerX][app.playerY]='c'
             setActiveScreen("maze")
 
-def room3_onKeyPess(app,key):
-    game_3.onKeyPress(app,key)
+def room3_onKeyPress(app,key):
+    if not app.gameOver2:
+        game_3.Points.onKeyPress(app,key)
     
 def room3_onStep(app):
-    game_3.onStep(app)
+    if not app.gameOver2:
+        game_3.Points.onStep(app)
 #_______________________________________________
 def maze_onAppStart(app):
     maze.features(app)
