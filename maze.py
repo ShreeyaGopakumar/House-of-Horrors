@@ -256,6 +256,7 @@ def onKeyPress(app,key):
             print(app.clues)
             app.playerY+=1
             return "over"
+    
     if key=="left":
         if app.maze[app.playerX-1][app.playerY]=="c":
             app.playerX-=1
