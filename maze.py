@@ -56,7 +56,7 @@ def printMaze(app):
                 if character in "123":
                     drawImage(app.door,Left,Top,width=50,height=50)
                 if character=='w':
-                    drawRect(Left,Top,50,50,fill='black',border='white')
+                    drawRect(Left,Top,50,50,fill='red',border='maroon')
 
 
 #helper functions for maze generation                
