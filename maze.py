@@ -17,8 +17,10 @@ def features(app):
     process(app)
     '''
     maze generation that uses the iterative randomized Prim's algorithm 
-    references: https://medium.com/swlh/fun-with-python-1-maze-generator-931639b4fb7e
-                https://en.wikipedia.org/wiki/Maze_generation_algorithm'''
+    references: 
+    Zekai, O. (2021, February 22). Fun with python #1: Maze Generator. Medium. https://medium.com/swlh/fun-with-python-1-maze-generator-931639b4fb7e 
+    Wikipedia Contributors. (2019, January 16). Maze generation algorithm. Wikipedia; Wikimedia Foundation. https://en.wikipedia.org/wiki/Maze_generation_algorithm
+    '''
 
     solveMaze(app) #solving the maze using backtracking
     rooms(app) #placing the rooms randomly in the maze
