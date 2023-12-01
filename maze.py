@@ -251,7 +251,7 @@ def solve(row, col, maze, n):
 
     for (dx, dy) in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
         solution = solve(row + dx, col + dy, maze, n)
-        if solution is not None:
+        if solution!=None:
             return solution
 
     maze[row][col] = 'c'  

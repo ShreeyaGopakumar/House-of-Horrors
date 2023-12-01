@@ -5,6 +5,7 @@ import os, pathlib
 def loadImages(app):
     def openImage(fileName):
         return Image.open(os.path.join(pathlib.Path(__file__).parent,fileName))
+    
     app.bg = openImage("images/bg.png")
     app.bgWidth,app.bgHeight = app.width,app.height
     app.bg = CMUImage(app.bg)
@@ -15,21 +16,28 @@ def loadImages(app):
 
     app.candles = openImage("images/candles.png")
     app.candles = CMUImage(app.candles)
+    
     app.killerclown=openImage("images/killerclown.png")
     app.killerclown=CMUImage(app.killerclown)
+    
     app.killerclown_2=openImage("images/killerclown_2.png")
     app.killerclown_2=CMUImage(app.killerclown_2)
+    
     app.clown = openImage("images/clown.png")
     app.clown = CMUImage(app.clown)
+    
     app.bg2=openImage("images/bg_2.png")
     app.bg2=CMUImage(app.bg2)
+    
     app.scary = openImage("images/scary.png")
     app.scary = CMUImage(app.scary)
     
     app.nun = openImage("images/nun.png")
     app.nun = CMUImage(app.nun)
+    
     app.room3_intro=openImage("images/room3_intro.png")
     app.room3_intro=CMUImage(app.room3_intro)
+    
     app.skull=openImage("images/skull.png")
     app.skull=CMUImage(app.skull)
     
@@ -73,23 +81,22 @@ def loadImages(app):
     app.over=openImage("images/over.png")
     app.over=CMUImage(app.over)
 
-    
-
-    
-    app.room3_frame4=openImage("images/room3_frame5.png")
-    app.room3_frame4=CMUImage(app.room3_frame4)
     app.player=openImage("images/player.png")
     app.player=CMUImage(app.player)
+    
     app.key=openImage("images/key.png")
     app.key=CMUImage(app.key)
+    
     app.door=openImage("images/door.png")
     app.door=CMUImage(app.door)
+    
     app.bg3=openImage("images/bg3.jpg")
     app.bg3=CMUImage(app.bg3)
     
     #___________________________________________________________________________
     '''Images used:
-    Background: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/
+    Background_1: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/
+    Background_2: https://www.deviantart.com/kuzy62/art/Spooky-Graveyard-934651358
     Candles: https://gallery.yopriceville.com/Free-Clipart-Pictures/Halloween-PNG-Pictures/Lighted_Candles_Transparent_Image
     Clown mask: https://www.walmart.com/ip/Adult-Whacko-Clown-Full-Face-Mask/1402672413?wmlspartner=wlpa&selectedSellerId=737
     Doors: https://community.boschsecurity.com/t5/Security-Access-Control/How-to-set-up-interlock-APE/ta-p/12325
@@ -98,7 +105,9 @@ def loadImages(app):
     Map: https://brainchase.com/national-scavenger-hunt-day-coming/
     Room2 (corridor): <a href="https://www.freepik.com/free-photo/abandoned-alley-psychiatric-hospital_5600084.htm#query=creepy%20corridor&position=0&from_view=search&track=ais&uuid=b257c826-e514-4c68-be4b-33706549068d">Image by jcomp</a> on Freepik
     Room2 (mortuary): <a href="https://www.freepik.com/free-photo/abandoned-morgue-psychiatric-hospital_5600088.htm#query=creepy%20lab&position=0&from_view=search&track=ais&uuid=251a2fa0-7336-42d8-9fec-09b092841387">Image by jcomp</a> on Freepik
+    Room3 (clown intro): https://www.amazon.com/Halloween-Decoration-Background-Photography-Backdrop/dp/B09C38SX8K?th=1
+    killerclown (spirits): https://genius.com/Andrews-imagination-at-sablon-beach-lyrics
     
-    Other screens - made on Canva
+    Other screens and elements - made on Canva
     '''
     #___________________________________________________________________________

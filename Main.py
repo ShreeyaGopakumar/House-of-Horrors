@@ -7,6 +7,7 @@ import Room2
 import image
 import game_3
 import maze
+
 def drawSidePanel(app):
     if app.sidePanel:
         drawRect(0,0,150,app.height,fill='black',border="white")
