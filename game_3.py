@@ -1,7 +1,9 @@
 from cmu_graphics import*
 class Points:
+
     def __init__(self,points):
         self.points=points
+    
     def draw(self,app,d):
         for (x,y) in self.points:
             if d==-1:
@@ -14,6 +16,7 @@ class Points:
             if distance(x,y,app.player2X,app.player2Y)<=40:
                 return True
         return False
+    
     def change(self,d):
         for i in range(len(self.points)):
             (x,y)=self.points[i]

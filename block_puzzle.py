@@ -15,6 +15,7 @@ def features(app):
     app.cy=app.canvasTop+300
     app.points=[(app.cx,app.cy)]
     app.showHints=False
+
     
 def redrawAll(app):
     

@@ -6,6 +6,7 @@ def clues(app):
     app.blockPuzzle=False
     app.clock=False
     block_puzzle.features(app)
+
 def redrawAll(app):
     if app.drawerOpen:
         drawImage(app.room1_frame2,0,0,width=app.width,height=app.height)
@@ -18,8 +19,6 @@ def redrawAll(app):
         drawLabel("X",225,app.height//2+100+15,fill='white',rotateAngle=-8,font='monospace' )
     if app.blockPuzzle:
         block_puzzle.redrawAll(app)
-    
-    
     
 def click(mouseX,mouseY):
     block_puzzle.onMousePress(mouseX,mouseY)

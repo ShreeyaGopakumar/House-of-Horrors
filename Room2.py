@@ -7,6 +7,7 @@ def clues(app):
     app.password=False
     app.input=""
     app.showHint=False
+
 def redrawAll(app):
     drawImage(app.room2,0,0,width=app.width,height=app.height)
     
@@ -28,6 +29,7 @@ def redrawAll(app):
             if not app.showHint:
                 drawRect(app.width//2-160,app.height-50,70,50,fill='white')
                 drawLabel("Hint",app.width//2-130, app.height-50+20,fill='black')
+    
     if app.skullAppear and app.skull not in app.clues:
         drawImage(app.skull,app.width//2+40,app.height//2+20,width=40,height=60,align='center')
     

@@ -13,16 +13,15 @@ def features(app):
     app.maze=[]
     app.rooms=["1","2","3"]
     app.names={"1":"corridor1","2":"room2_intro","3":"room3_intro"}
-    app.diaryX=0
-    app.diaryY=0
+    
+    process(app)
     '''
     maze generation that uses the iterative randomized Prim's algorithm 
     references: https://medium.com/swlh/fun-with-python-1-maze-generator-931639b4fb7e
                 https://en.wikipedia.org/wiki/Maze_generation_algorithm'''
 
-    process(app)
-    solveMaze(app)
-    rooms(app)
+    solveMaze(app) #solving the maze using backtracking
+    rooms(app) #placing the rooms randomly in the maze
     
 
 def rooms(app):
@@ -44,15 +43,13 @@ def printMaze(app):
         for y in range(len(app.maze[0])):
             Left=((app.width-(50*app.mazeWidth))//2)+x*50
             Top=((app.height-(50*app.mazeHeight))//2)+y*50
+            
             character=app.maze[x][y]
             if x==app.playerX and y==app.playerY:
                 drawImage(app.player,Left,Top,width=50,height=50)
             else:
                 if character=='p':
                     drawImage(app.key,Left,Top,width=50,height=50)
-                   
-                
-                
                 if character in "123":
                     drawImage(app.door,Left,Top,width=50,height=50)
                 if character=='w':
@@ -235,79 +232,58 @@ def solveMaze(app):
     
     
 def isValid(row, col, n, maze):
-    return 0 <= row < n and 0 <= col < n and maze[row][col] != 'w'
+    return 0 <= row < n and 0 <= col < n and maze[row][col] != 'w'# not a wall
 
 def solve(row, col, maze, n):
+
     if not isValid(row, col, n, maze):
         return None 
 
     if maze[row][col] == 'p':
         return maze  
 
-    if maze[row][col] == 'v':
+    if maze[row][col] == 'v':#visited cell
         return None  
 
     maze[row][col] = 'v'  
 
     for (dx, dy) in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
-        solution = solve(row + dx, col + dy, maze, n)
+        solution = solve(row + dx, col + dy, maze, n)#recursive call
         if solution!=None:
             return solution
 
-    maze[row][col] = 'c'  
+    maze[row][col] = 'c'#backtracking  
 
     return None
     
 def redrawAll(app):
     printMaze(app)    
 
+def change(app,dx,dy):
+    if app.maze[app.playerX+dx][app.playerY+dy]=='c' or app.maze[app.playerX+dx][app.playerY+dy]=='v':
+        app.playerY+=dy
+        app.playerX+=dx
+    elif app.maze[app.playerX+dx][app.playerY+dy] in "123":
+        character=app.maze[app.playerX+dx][app.playerY+dy]
+        app.playerY+=dy
+        app.playerX+=dx
+        return app.names[character]
+    elif app.maze[app.playerX+dx][app.playerY+dy]=='p' and set(app.clues_tofind)==set(app.clues):
+        app.playerY+=dy
+        app.playerX+=dx
+        return "over"
+            
 def onKeyPress(app,key):
     if key=="up":
-        
-        if app.maze[app.playerX][app.playerY-1]=="c" or app.maze[app.playerX][app.playerY-1]=='v':
-            app.playerY-=1
-        elif app.maze[app.playerX][app.playerY-1] in "123":
-            character=app.maze[app.playerX][app.playerY-1]
-            app.playerY-=1
-            return app.names[character]
-        elif app.maze[app.playerX][app.playerY-1]=="p"and set(app.clues_tofind)==set(app.clues):
-            app.playerY-=1
-            return "over"
-        
-        
+        return change(app,0,-1)
+              
     if key=="down":
-        if app.maze[app.playerX][app.playerY+1]=="c"or app.maze[app.playerX][app.playerY+1]=='v':
-            app.playerY+=1
-        elif app.maze[app.playerX][app.playerY+1] in "123":
-            character=app.maze[app.playerX][app.playerY+1]
-            app.playerY+=1
-            return app.names[character]
-        elif app.maze[app.playerX][app.playerY+1]=="p" and set(app.clues_tofind)==set(app.clues):
-            print(app.clues)
-            app.playerY+=1
-            return "over"
-    
+        return change(app,0,1)
+        
     if key=="left":
-        if app.maze[app.playerX-1][app.playerY]=="c"or app.maze[app.playerX-1][app.playerY]=='v':
-            app.playerX-=1
-        elif app.maze[app.playerX-1][app.playerY] in "123":
-            character=app.maze[app.playerX-1][app.playerY]
-            app.playerX-=1
-            return app.names[character]
-        elif app.maze[app.playerX-1][app.playerY]=="p"and set(app.clues_tofind)==set(app.clues):
-            app.playerX-=1
-            return "over"
+        return change(app,-1,0)
                 
     if key=="right":
-        if app.maze[app.playerX+1][app.playerY]=="c"or app.maze[app.playerX+1][app.playerY]=='v':
-            app.playerX+=1
-        elif app.maze[app.playerX+1][app.playerY] in "123":
-            character=app.maze[app.playerX+1][app.playerY]
-            app.playerX+=1
-            return app.names[character]
-        elif app.maze[app.playerX+1][app.playerY]=="p"and set(app.clues_tofind)==set(app.clues):
-            app.playerX+=1
-            return "over"
-        
+        return change(app,1,0)
 
      
