@@ -31,7 +31,8 @@ def rooms(app):
     else:
         dx=random.randint(0,app.mazeWidth-1)
         dy=random.randint(0,app.mazeHeight-1)
-        if app.maze[dx][dy]=='v':
+        
+        if app.maze[dx][dy]=='v' and dx!=app.playerX and dy!=app.playerY:
             app.maze[dx][dy]=app.rooms[0]
             app.rooms=app.rooms[1:]
             rooms(app)
@@ -48,18 +49,15 @@ def printMaze(app):
                 drawImage(app.player,Left,Top,width=50,height=50)
             else:
                 if character=='p':
-                    if set(app.clues_tofind)==set(app.clues):
-                        drawImage(app.key,Left,Top,width=50,height=50)
-                    else:
-                        drawImage(app.chucky,Left,Top,width=50,height=50)
+                    drawImage(app.key,Left,Top,width=50,height=50)
+                   
                 
                 
                 if character in "123":
                     drawImage(app.door,Left,Top,width=50,height=50)
                 if character=='w':
-                    drawRect(Left,Top,50,50,fill='grey',border='white')
-                if character=='c' or character=='v':
-                    drawRect(Left,Top,50,50,fill='white')
+                    drawRect(Left,Top,50,50,fill='black',border='white')
+
 
 #helper functions for maze generation                
 def countSurroundings(app,randomWall):
@@ -232,10 +230,9 @@ def process(app):
             break
 
 def solveMaze(app):
-    print(app.maze)
     maze=solve(app.playerX,app.playerY,app.maze,app.mazeHeight)
     app.maze=maze
-    app.showMaze=True
+    
     
 def isValid(row, col, n, maze):
     return 0 <= row < n and 0 <= col < n and maze[row][col] != 'w'

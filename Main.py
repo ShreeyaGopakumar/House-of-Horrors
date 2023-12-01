@@ -5,7 +5,6 @@ import doors
 import Room1
 import Room2
 import image
-#import Room3
 import game_3
 import maze
 def drawSidePanel(app):
@@ -216,7 +215,7 @@ def maze_onAppStart(app):
     maze.features(app)
 
 def maze_redrawAll(app):
-
+    drawImage(app.bg3,0,0,width=app.width,height=app.height)
     maze.printMaze(app)
     drawOptions(app)
     drawSidePanel(app)
