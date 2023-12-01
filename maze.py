@@ -12,7 +12,7 @@ def features(app):
     app.mazeWidth=11
     app.maze=[]
     app.rooms=["1","2","3"]
-    app.names={"1":"corridor1","2":"room2_intro","3":"room3"}
+    app.names={"1":"corridor1","2":"room2_intro","3":"room3_intro"}
     app.diaryX=0
     app.diaryY=0
     '''
@@ -21,6 +21,7 @@ def features(app):
                 https://en.wikipedia.org/wiki/Maze_generation_algorithm'''
 
     process(app)
+    solveMaze(app)
     rooms(app)
     
 
@@ -30,7 +31,7 @@ def rooms(app):
     else:
         dx=random.randint(0,app.mazeWidth-1)
         dy=random.randint(0,app.mazeHeight-1)
-        if app.maze[dx][dy]=='c' and dx!=app.startWidth and dy!=app.startHeight and dx not in [0,app.mazeWidth-1] and dy not in [0,app.mazeHeight-1]:
+        if app.maze[dx][dy]=='v':
             app.maze[dx][dy]=app.rooms[0]
             app.rooms=app.rooms[1:]
             rooms(app)
@@ -40,23 +41,25 @@ def rooms(app):
 def printMaze(app):
     for x in range(len(app.maze)):
         for y in range(len(app.maze[0])):
+            Left=((app.width-(50*app.mazeWidth))//2)+x*50
+            Top=((app.height-(50*app.mazeHeight))//2)+y*50
             character=app.maze[x][y]
             if x==app.playerX and y==app.playerY:
-                drawImage(app.player,350+x*50,100+y*50,width=50,height=50)
+                drawImage(app.player,Left,Top,width=50,height=50)
             else:
                 if character=='p':
                     if set(app.clues_tofind)==set(app.clues):
-                        drawImage(app.key,350+x*50,100+y*50,width=50,height=50)
+                        drawImage(app.key,Left,Top,width=50,height=50)
                     else:
-                        drawImage(app.chucky,350+x*50,100+y*50,width=50,height=50)
+                        drawImage(app.chucky,Left,Top,width=50,height=50)
                 
                 
                 if character in "123":
-                    drawImage(app.door,350+x*50,100+y*50,width=50,height=50)
+                    drawImage(app.door,Left,Top,width=50,height=50)
                 if character=='w':
-                    drawRect(350+x*50,100+y*50,50,50,fill='grey',border='white')
-                if character=='c':
-                    drawRect(350+x*50,100+y*50,50,50,fill='white')
+                    drawRect(Left,Top,50,50,fill='grey',border='white')
+                if character=='c' or character=='v':
+                    drawRect(Left,Top,50,50,fill='white')
 
 #helper functions for maze generation                
 def countSurroundings(app,randomWall):
@@ -228,13 +231,43 @@ def process(app):
             app.maze[app.mazeHeight-1][x] = 'p'
             break
 
+def solveMaze(app):
+    print(app.maze)
+    maze=solve(app.playerX,app.playerY,app.maze,app.mazeHeight)
+    app.maze=maze
+    app.showMaze=True
+    
+def isValid(row, col, n, maze):
+    return 0 <= row < n and 0 <= col < n and maze[row][col] != 'w'
+
+def solve(row, col, maze, n):
+    if not isValid(row, col, n, maze):
+        return None 
+
+    if maze[row][col] == 'p':
+        return maze  
+
+    if maze[row][col] == 'v':
+        return None  
+
+    maze[row][col] = 'v'  
+
+    for (dx, dy) in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+        solution = solve(row + dx, col + dy, maze, n)
+        if solution is not None:
+            return solution
+
+    maze[row][col] = 'c'  
+
+    return None
+    
 def redrawAll(app):
     printMaze(app)    
 
 def onKeyPress(app,key):
     if key=="up":
         
-        if app.maze[app.playerX][app.playerY-1]=="c":
+        if app.maze[app.playerX][app.playerY-1]=="c" or app.maze[app.playerX][app.playerY-1]=='v':
             app.playerY-=1
         elif app.maze[app.playerX][app.playerY-1] in "123":
             character=app.maze[app.playerX][app.playerY-1]
@@ -246,7 +279,7 @@ def onKeyPress(app,key):
         
         
     if key=="down":
-        if app.maze[app.playerX][app.playerY+1]=="c":
+        if app.maze[app.playerX][app.playerY+1]=="c"or app.maze[app.playerX][app.playerY+1]=='v':
             app.playerY+=1
         elif app.maze[app.playerX][app.playerY+1] in "123":
             character=app.maze[app.playerX][app.playerY+1]
@@ -258,7 +291,7 @@ def onKeyPress(app,key):
             return "over"
     
     if key=="left":
-        if app.maze[app.playerX-1][app.playerY]=="c":
+        if app.maze[app.playerX-1][app.playerY]=="c"or app.maze[app.playerX-1][app.playerY]=='v':
             app.playerX-=1
         elif app.maze[app.playerX-1][app.playerY] in "123":
             character=app.maze[app.playerX-1][app.playerY]
@@ -269,7 +302,7 @@ def onKeyPress(app,key):
             return "over"
                 
     if key=="right":
-        if app.maze[app.playerX+1][app.playerY]=="c":
+        if app.maze[app.playerX+1][app.playerY]=="c"or app.maze[app.playerX+1][app.playerY]=='v':
             app.playerX+=1
         elif app.maze[app.playerX+1][app.playerY] in "123":
             character=app.maze[app.playerX+1][app.playerY]

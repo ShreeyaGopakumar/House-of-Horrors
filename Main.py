@@ -170,6 +170,21 @@ def room2_onMousePress(app,mouseX,mouseY):
 def room2_onKeyPress(app,key):
     Room2.onKeyPress(app,key)
 #_______________________________________________
+def room3_intro_redrawAll(app):
+    drawImage(app.room3_intro,0,0,width=app.width,height=app.height)
+    drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
+
+    drawOptions(app)
+    drawSidePanel(app)
+    
+
+def room3_intro_onMousePress(app,mouseX,mouseY):
+    sidePanelClick(app,mouseX,mouseY)
+    
+    if inArrow(app,mouseX,mouseY):
+            setActiveScreen("room3")
+
+#_______________________________________________
 def room3_onAppStart(app):
     game_3.Points.features(app)
 def room3_redrawAll(app):

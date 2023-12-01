@@ -55,17 +55,23 @@ class Points:
                 
                 if not app.gameOver2:
                     app.player2X-=10
+                    if distance(app.player2X,app.player2Y,app.width-35,app.height-45)<=(35+30):
+                        app.gameOver2=True
                     
                 
             if key=='right':
                 
                 if not app.gameOver2:
                     app.player2X+=10
+                    if distance(app.player2X,app.player2Y,app.width-35,app.height-45)<=(35+30):
+                        app.gameOver2=True
                 
             if key=="up":
                 
                 if not app.gameOver2:
                     app.player2Y-=10
+                    if distance(app.player2X,app.player2Y,app.width-35,app.height-45)<=(35+30):
+                        app.gameOver2=True
                 
             if key=="down":
                 if not app.gameOver2:

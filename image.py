@@ -29,7 +29,8 @@ def loadImages(app):
     app.heart=CMUImage(app.heart)
     app.nun = openImage("images/nun.png")
     app.nun = CMUImage(app.nun)
-    
+    app.room3_intro=openImage("images/room3_intro.png")
+    app.room3_intro=CMUImage(app.room3_intro)
     app.skull=openImage("images/skull.png")
     app.skull=CMUImage(app.skull)
     
