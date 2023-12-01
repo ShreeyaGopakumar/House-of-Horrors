@@ -25,8 +25,7 @@ def loadImages(app):
     app.bg2=CMUImage(app.bg2)
     app.scary = openImage("images/scary.png")
     app.scary = CMUImage(app.scary)
-    app.heart=CMUImage("images/heart.jpg")
-    app.heart=CMUImage(app.heart)
+    
     app.nun = openImage("images/nun.png")
     app.nun = CMUImage(app.nun)
     app.room3_intro=openImage("images/room3_intro.png")
@@ -34,9 +33,6 @@ def loadImages(app):
     app.skull=openImage("images/skull.png")
     app.skull=CMUImage(app.skull)
     
-    app.chucky=openImage("images/chucky.png")
-    app.chucky=CMUImage(app.chucky)
-
     app.door1 = openImage("images/door1.png")
     app.door1Width,app.door1Height = app.door1.width,app.door1.height
     app.door1 = CMUImage(app.door1)
@@ -79,15 +75,7 @@ def loadImages(app):
 
     
 
-    app.room3_frame1=openImage("images/room3_frame1.png")
-    app.room3_frame1=CMUImage(app.room3_frame1)
     
-    app.room3_frame2=openImage("images/room3_frame2.png")
-    app.room3_frame2=CMUImage(app.room3_frame2)
-
-    app.room3_frame3=openImage("images/room3_frame3.png")
-    app.room3_frame3=CMUImage(app.room3_frame3)
-
     app.room3_frame4=openImage("images/room3_frame5.png")
     app.room3_frame4=CMUImage(app.room3_frame4)
     app.player=openImage("images/player.png")
