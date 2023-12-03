@@ -113,7 +113,7 @@ def corridor1_redrawAll(app):
     drawOptions(app)
     drawSidePanel(app)
     if app.fiveMinute:
-        drawImage(app.timer,100,100,width=100,height=100)
+        drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)
     
 def corridor1_onMousePress(app,mouseX,mouseY):
     doors.click(mouseX,mouseY)
@@ -134,7 +134,7 @@ def room1_redrawAll(app):
     if app.candles in app.clues:
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
     if app.fiveMinute:
-        drawImage(app.timer,100,100,width=100,height=100)
+        drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)
 
 def room1_onMousePress(app,mouseX,mouseY):
     Room1.click(mouseX,mouseY)
@@ -160,7 +160,7 @@ def room2_intro_redrawAll(app):
     drawOptions(app)
     drawSidePanel(app)
     if app.fiveMinute:
-        drawImage(app.timer,100,100,width=100,height=100)
+        drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)
 
 def room2_intro_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
@@ -184,7 +184,7 @@ def room2_redrawAll(app):
         drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
     if app.fiveMinute:
-        drawImage(app.timer,100,100,width=100,height=100)    
+        drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)  
 def room2_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
     Room2.click(mouseX,mouseY)
@@ -208,7 +208,7 @@ def room3_intro_redrawAll(app):
     drawOptions(app)
     drawSidePanel(app)
     if app.fiveMinute:
-        drawImage(app.timer,100,100,width=100,height=100)
+        drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)
     
 
 def room3_intro_onMousePress(app,mouseX,mouseY):
@@ -232,7 +232,7 @@ def room3_redrawAll(app):
     if app.clown in app.clues:
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
     if app.fiveMinute:
-        drawImage(app.timer,100,100,width=100,height=100)
+        drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)
 
 def room3_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
@@ -263,7 +263,7 @@ def maze_redrawAll(app):
     drawOptions(app)
     drawSidePanel(app)
     if app.fiveMinute:
-        drawImage(app.timer,100,100,width=100,height=100)
+        drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)
 
 def maze_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
