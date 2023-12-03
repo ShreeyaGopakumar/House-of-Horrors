@@ -299,8 +299,8 @@ def over_onMousePress(app,mouseX,mouseY):
 #________________________________________________
 
 def gameLost_redrawAll(app):
-    drawImage(app.gameOverImage,0,0,width=app.width,height=app.height)
-    
+    drawImage(app.lost,0,0,width=app.width,height=app.height)
+
 
 def gameLost_onMousePress(app,mouseX,mouseY):
     if app.width//2-155<=mouseX<=app.width//2+155 and app.height//2+140<=mouseY<=app.height//2+210:
@@ -309,7 +309,8 @@ def gameLost_onMousePress(app,mouseX,mouseY):
 #___________________________________________________
 
 def scare_redrawAll(app):
-    drawImage(app.jumpscare,0,0,width=app.width,height=app.height)
+    drawRect(0,0,app.width,app.height)
+    drawImage(app.jumpscare,app.width//2,app.height//2,width=app.width-200,height=app.height,align='center')
 
 def scare_onStep(app):
     checkTime(app)

@@ -93,8 +93,8 @@ def loadImages(app):
     app.bg3=openImage("images/bg3.jpg")
     app.bg3=CMUImage(app.bg3)
 
-    app.gameOverImage=openImage("images/gameOver.png")
-    app.gameOverImage=CMUImage(app.gameOver)
+    app.lost=openImage("images/gameOver.png")
+    app.lost=CMUImage(app.lost)
 
     app.timer=openImage("images/timer.png")
     app.timer=CMUImage(app.timer)
