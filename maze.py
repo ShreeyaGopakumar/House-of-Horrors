@@ -12,7 +12,8 @@ def features(app):
     app.mazeWidth=11
     app.maze=[]
     app.rooms=["1","2","3"]
-    app.names={"1":"corridor1","2":"room2_intro","3":"room3_intro"}
+    app.names={"1":"corridor1","2":"room2_intro","3":"room3_intro","f":"scare"}
+
     
     process(app)
     '''
@@ -24,7 +25,16 @@ def features(app):
 
     solveMaze(app) #solving the maze using backtracking
     rooms(app) #placing the rooms randomly in the maze
-    
+    fake_rooms(app)
+
+def fake_rooms(app):
+    n=3
+    while(n>0):
+        dx=random.randint(0,app.mazeWidth-1)
+        dy=random.randint(0,app.mazeHeight-1)
+        if app.maze[dx][dy]=='c' and dx!=app.playerX and dy!=app.playerY:
+            app.maze[dx][dy]='f'
+            n=n-1
 
 def rooms(app):
     if app.rooms==[]:
@@ -52,7 +62,7 @@ def printMaze(app):
             else:
                 if character=='p':
                     drawImage(app.key,Left,Top,width=50,height=50)
-                if character in "123":
+                if character in "123f":
                     drawImage(app.door,Left,Top,width=50,height=50)
                 if character=='w':
                     drawRect(Left,Top,50,50,fill='red',border='maroon')
@@ -265,7 +275,7 @@ def change(app,dx,dy):
     if app.maze[app.playerX+dx][app.playerY+dy]=='c' or app.maze[app.playerX+dx][app.playerY+dy]=='v':
         app.playerY+=dy
         app.playerX+=dx
-    elif app.maze[app.playerX+dx][app.playerY+dy] in "123":
+    elif app.maze[app.playerX+dx][app.playerY+dy] in "123f":
         character=app.maze[app.playerX+dx][app.playerY+dy]
         app.playerY+=dy
         app.playerX+=dx

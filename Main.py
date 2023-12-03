@@ -8,7 +8,6 @@ import image
 import game_3
 import maze
 import time
-#import timer
 import datetime
 
 #common functions_______________________________________________________________
@@ -123,14 +122,7 @@ def corridor1_onMousePress(app,mouseX,mouseY):
         setActiveScreen("room1")   
 
 def corridor1_onStep(app):
-    app.timePassed+=1
-    if app.timePassed%30==0:
-        if app.totalSeconds==0:
-            setActiveScreen("gameOver")
-        else:
-            if app.totalSeconds<(300):
-                app.fiveMinute=True
-            app.totalSeconds-=1
+    checkTime(app)
 #_______________________________________________
 def room1_onAppStart(app):
     Room1.clues(app)
@@ -158,14 +150,7 @@ def room1_onKeyPress(app,key):
     Room1.onKeyPress(app,key)
 
 def room1_onStep(app):
-    app.timePassed+=1
-    if app.timePassed%30==0:
-        if app.totalSeconds==0:
-            setActiveScreen("mainOver")
-        else:
-            if app.totalSeconds<(300):
-                app.fiveMinute=True
-            app.totalSeconds-=1
+    checkTime(app)
 #_______________________________________________________________________________
 
 def room2_intro_redrawAll(app):
@@ -184,14 +169,7 @@ def room2_intro_onMousePress(app,mouseX,mouseY):
             setActiveScreen("room2")
 
 def room2_intro_onStep(app):
-    app.timePassed+=1
-    if app.timePassed%30==0:
-        if app.totalSeconds==0:
-            setActiveScreen("mainOver")
-        else:
-            if app.totalSeconds<(300):
-                app.fiveMinute=True
-            app.totalSeconds-=1
+    checkTime(app)
 
 #_______________________________________________________________________________
 
@@ -220,14 +198,7 @@ def room2_onKeyPress(app,key):
     Room2.onKeyPress(app,key)
 
 def room2_onStep(app):
-    app.timePassed+=1
-    if app.timePassed%30==0:
-        if app.totalSeconds==0:
-            setActiveScreen("mainOver")
-        else:
-            if app.totalSeconds<(300):
-                app.fiveMinute=True
-            app.totalSeconds-=1
+    checkTime(app)
 
 #_______________________________________________________________________________
 
@@ -246,14 +217,7 @@ def room3_intro_onMousePress(app,mouseX,mouseY):
             setActiveScreen("room3")
 
 def room3_intro_onStep(app):
-    app.timePassed+=1
-    if app.timePassed%30==0:
-        if app.totalSeconds==0:
-            setActiveScreen("mainOver")
-        else:
-            if app.totalSeconds<(300):
-                app.fiveMinute=True
-            app.totalSeconds-=1
+    checkTime(app)
 #_______________________________________________________________________________
 
 def room3_onAppStart(app):
@@ -285,14 +249,7 @@ def room3_onKeyPress(app,key):
 def room3_onStep(app):
     if not app.gameOver2:
         game_3.Points.onStep(app)
-    app.timePassed+=1
-    if app.timePassed%30==0:
-        if app.totalSeconds==0:
-            setActiveScreen("mainOver")
-        else:
-            if app.totalSeconds<(300):
-                app.fiveMinute=True
-            app.totalSeconds-=1
+    checkTime(app)
 
 
 #_______________________________________________________________________________
@@ -315,23 +272,69 @@ def maze_onKeyPress(app,key):
     if room!=None:
         setActiveScreen(room)  
 def maze_onStep(app):
+    checkTime(app)
+    
+#______________________________________________
+def checkTime(app):
     app.timePassed+=1
     if app.timePassed%30==0:
         if app.totalSeconds==0:
-            setActiveScreen("mainOver")
+            setActiveScreen("gameLost")
         else:
             if app.totalSeconds<300:
                 app.fiveMinute=True
             app.totalSeconds-=1
+
 #_______________________________________________
 
 def over_redrawAll(app):
     drawImage(app.over,0,0,width=app.width,height=app.height)
+
+    
+def over_onMousePress(app,mouseX,mouseY):
+    if app.width//2-155<=mouseX<=app.width//2+155 and app.height//2+140<=mouseY<=app.height//2+210:
+        restart(app)
+        setActiveScreen("welcome")
     
 #________________________________________________
 
-def mainOver_redrawAll(app):
+def gameLost_redrawAll(app):
     drawImage(app.gameOverImage,0,0,width=app.width,height=app.height)
+    
+
+def gameLost_onMousePress(app,mouseX,mouseY):
+    if app.width//2-155<=mouseX<=app.width//2+155 and app.height//2+140<=mouseY<=app.height//2+210:
+        restart(app)
+        setActiveScreen("welcome")
+#___________________________________________________
+
+def scare_redrawAll(app):
+    drawImage(app.jumpscare,0,0,width=app.width,height=app.height)
+
+def scare_onStep(app):
+    checkTime(app)
+    if app.timePassed%90==0:
+        app.maze[app.playerX][app.playerY]='c'
+        setActiveScreen("maze")
+    
+
+def restart(app):
+    maze.features(app)
+    game_3.Points.features(app)
+    image.loadImages(app)
+    app.clues_tofind=[app.candles,app.skull,app.clown]
+    app.sidePanel=False
+    app.width=1300
+    app.height=750
+    app.clues=[]
+    app.roomsVisited=[]
+    app.gameOver2=False
+    app.totalSeconds=900
+    app.timePassed=0
+    app.fiveMinute=False
+    doors.features(app)
+    Room1.clues(app)
+    Room2.clues(app)
 
 def main():
     runAppWithScreens(initialScreen='welcome')

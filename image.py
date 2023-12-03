@@ -96,9 +96,11 @@ def loadImages(app):
     app.gameOverImage=openImage("images/gameOver.png")
     app.gameOverImage=CMUImage(app.gameOver)
 
-    app.timer=openImage("images/timer.jpg")
+    app.timer=openImage("images/timer.png")
     app.timer=CMUImage(app.timer)
     
+    app.jumpscare=openImage("images/jumpscare.gif")
+    app.jumpscare=CMUImage(app.jumpscare)
     #___________________________________________________________________________
     '''Images used:
     Background_1: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/
