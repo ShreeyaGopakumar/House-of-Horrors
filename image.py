@@ -101,6 +101,9 @@ def loadImages(app):
     
     app.jumpscare=openImage("images/jumpscare.gif")
     app.jumpscare=CMUImage(app.jumpscare)
+    
+    app.knife=openImage("images/knife.png")
+    app.knife=CMUImage(app.knife)
     #___________________________________________________________________________
     '''Images used:
     Background_1: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/
