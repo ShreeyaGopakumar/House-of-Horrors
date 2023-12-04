@@ -11,8 +11,8 @@ def features(app):
     app.mazeHeight=11
     app.mazeWidth=11
     app.maze=[]
-    app.rooms=["1","2","3"]
-    app.names={"1":"corridor1","2":"room2_intro","3":"room3_intro","f":"scare"}
+    app.rooms=["1","2","3","4"]
+    app.names={"1":"corridor1","2":"room2_intro","3":"room3_intro","f":"scare","4":"room4_intro"}
 
     
     process(app)
@@ -62,7 +62,7 @@ def printMaze(app):
             else:
                 if character=='p':
                     drawImage(app.key,Left,Top,width=50,height=50)
-                if character in "123f":
+                if character in "1234f":
                     drawImage(app.door,Left,Top,width=50,height=50)
                 if character=='w':
                     drawRect(Left,Top,50,50,fill='red',border='maroon')
@@ -275,7 +275,7 @@ def change(app,dx,dy):
     if app.maze[app.playerX+dx][app.playerY+dy]=='c' or app.maze[app.playerX+dx][app.playerY+dy]=='v':
         app.playerY+=dy
         app.playerX+=dx
-    elif app.maze[app.playerX+dx][app.playerY+dy] in "123f":
+    elif app.maze[app.playerX+dx][app.playerY+dy] in "1234f":
         character=app.maze[app.playerX+dx][app.playerY+dy]
         app.playerY+=dy
         app.playerX+=dx

@@ -6,6 +6,7 @@ import Room1
 import Room2
 import image
 import game_3
+import game_2
 import maze
 import time
 import datetime
@@ -229,7 +230,7 @@ def room3_redrawAll(app):
     drawSidePanel(app)
     if app.gameOver2:
         app.clues.append(app.clown)
-        app.clues.append(app.knife)
+        
     if app.clown in app.clues:
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
     if app.fiveMinute:
@@ -252,16 +253,36 @@ def room3_onStep(app):
         game_3.Points.onStep(app)
     checkTime(app)
 
-
 #_______________________________________________________________________________
-#def room4_onAppStart(app):
-    #game_2.features(app)
 
-'''def room4_redrawAll(app):
+def room4_intro_redrawAll(app):
+    drawImage(app.room4_intro,0,0,width=app.width,height=app.height)
+    drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
+    drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
+    drawOptions(app)
+    drawSidePanel(app)
+    if app.fiveMinute:
+        drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)
+    
+
+def room4_intro_onMousePress(app,mouseX,mouseY):
+    sidePanelClick(app,mouseX,mouseY)
+    if inArrow(app,mouseX,mouseY):
+            setActiveScreen("room4")
+
+def room4_intro_onStep(app):
+    checkTime(app)
+#_______________________________________________________________________________
+def room4_onAppStart(app):
+    game_2.features(app)
+
+def room4_redrawAll(app):
+    
     game_2.redrawAll(app)
     drawOptions(app)
     drawSidePanel(app)
     if app.knife in app.clues:
+        drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
     if app.fiveMinute:
         drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)
@@ -281,10 +302,10 @@ def room4_onKeyHold(app,key):
     game_2.onKeyHold(app,key)
 
 def room4_onStep(app):
-    if app.gameOver3:
+    if app.gameOver4:
         app.clues.append(app.knife)
     game_2.onStep(app)
-    checkTime(app)    '''
+    checkTime(app)   
 
 #_______________________________________________________________________________
 
@@ -356,6 +377,7 @@ def scare_onStep(app):
 def restart(app):
     maze.features(app)
     game_3.Points.features(app)
+    game_2.features(app)
     image.loadImages(app)
     app.clues_tofind=[app.candles,app.skull,app.clown,app.knife]
     app.sidePanel=False
@@ -370,6 +392,7 @@ def restart(app):
     doors.features(app)
     Room1.clues(app)
     Room2.clues(app)
+
 
 def main():
     runAppWithScreens(initialScreen='welcome')

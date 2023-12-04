@@ -104,6 +104,9 @@ def loadImages(app):
     
     app.knife=openImage("images/knife.png")
     app.knife=CMUImage(app.knife)
+
+    app.room4_intro=openImage("images/room4_intro.png")
+    app.room4_intro=CMUImage(app.room4_intro)
     #___________________________________________________________________________
     '''Images used:
     Background_1: https://www.ngpf.org/blog/activities/escape-from-the-haunted-mansion-a-new-halloween-activity/

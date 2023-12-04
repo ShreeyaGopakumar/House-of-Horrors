@@ -1,8 +1,6 @@
 from cmu_graphics import*
-def onAppStart(app):
-    app.height=750
-    app.width=400
-    app.gameOver=False
+def features(app):
+    app.gameOver4=False
     app.playerX3=app.width//2
     app.playerY3=630
     app.control=app.playerY3
@@ -15,21 +13,23 @@ def onAppStart(app):
     app.playerIsFalling=False
 
 def onStep(app):
-    app.playerY3+=app.playerdy
-    if app.playerIsJumping:
-        app.playerIsFalling=True
-        app.playerdy+=0.5
-    
-    if app.playerY3+30>=750-30:
-        app.playerdy=0
-        app.playerIsJumping=False
-        app.playerIsFalling=False
-    i=0
-    for (x,y) in app.platforms:
-        if distance(x,y,app.playerX3,app.playerY3)<=(20) and x-25<=app.playerX3<=x+25:
-            app.playerIsJumping=False
-            app.playerdy=0
-            app.playerIsFalling=False
+    if not app.gameOver4:
+        app.playerY3+=app.playerdy
+        if app.playerIsJumping:
+            app.playerIsFalling=True
+            app.playerdy+=0.5
+        
+        if app.playerY3+30>=750-30:
+            features(app)
+        i=0
+        for (x,y) in app.platforms:
+            if distance(x,y,app.playerX3,app.playerY3)<=(20) and x-25<=app.playerX3<=x+25:
+                if (x,y)==(app.width//2+60-130,50):
+                    app.gameOver4=True
+                if not app.gameOver4:
+                    app.playerIsJumping=False
+                    app.playerdy=0
+                    app.playerIsFalling=False
         
 def check(app):
     for (x,y) in app.platforms:
@@ -38,7 +38,7 @@ def check(app):
     return True
             
 def onKeyHold(app,keys):
-    if not app.gameOver:
+    if not app.gameOver4:
         if 'right' in keys:
             if not app.playerIsJumping:
                 if not check(app):
@@ -52,7 +52,7 @@ def onKeyHold(app,keys):
             app.playerX3-=5
     
 def onKeyPress(app,key):
-    if not app.gameOver:
+    if not app.gameOver4:
         if key=='space' and not app.playerIsFalling:
             for (x,y) in app.platforms:
                 if app.playerY3-30==y and x-25<=app.playerX3<=x+25:
@@ -61,13 +61,12 @@ def onKeyPress(app,key):
             app.playerdy=-10
 
 def redrawAll(app):
-    if not app.gameOver:
-        for (x,y) in app.platforms:
-            drawRect(x,y,40,30,fill='black',align='center')
-        drawCircle(app.playerX3,app.playerY3,20,fill='blue')
+    drawRect(0,0,app.width,app.height,fill='black')
+    for (x,y) in app.platforms:
+        if (x,y)==(app.width//2+60-130,50) and not app.gameOver4:
+            drawImage(app.knife,x,y,width=30,height=40,align='center')
+        else:
+            drawRect(x,y,40,30,fill='white',align='center')
+    drawImage(app.player,app.playerX3,app.playerY3,width=50,height=50,align='center')
         
 
-def main():
-    runApp()
-
-main()
