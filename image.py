@@ -121,7 +121,8 @@ def loadImages(app):
     Room2 (mortuary): <a href="https://www.freepik.com/free-photo/abandoned-morgue-psychiatric-hospital_5600088.htm#query=creepy%20lab&position=0&from_view=search&track=ais&uuid=251a2fa0-7336-42d8-9fec-09b092841387">Image by jcomp</a> on Freepik
     Room3 (clown intro): https://www.amazon.com/Halloween-Decoration-Background-Photography-Backdrop/dp/B09C38SX8K?th=1
     killerclown (spirits): https://genius.com/Andrews-imagination-at-sablon-beach-lyrics
-    
-    Other screens and elements - made on Canva
+    knife: https://www.amazon.com/Skeleteen-Large-Bloody-Knife-Realistic/dp/B07J5VD9JC
+    jumpscare: https://www.icegif.com/wp-content/uploads/2021/11/icegif-571.gif
+    Other screens and elements were made on Canva by Shreeya Gopakumar
     '''
     #___________________________________________________________________________
