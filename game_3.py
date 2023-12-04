@@ -91,6 +91,7 @@ class Points:
     def onStep(app):
         if not app.gameOver2:
             if Points.collision(app):
+               app.jump.play(restart=True)
                Points.features(app)
             if not app.gameOver2:
                 app.points_1.change(-1)

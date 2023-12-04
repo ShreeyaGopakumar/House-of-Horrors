@@ -9,6 +9,7 @@ import game_3
 import game_2
 import maze
 import time
+import sounds
 import datetime
 
 #common functions_______________________________________________________________
@@ -40,10 +41,13 @@ def drawOptions(app):
     drawCircle(40,40,30,fill='black',border='white')
     drawLabel("CLUES",40,40,fill='white',font='monospace')
   
+
+
 #_______________________________________________________________________________  
 
 def welcome_onAppStart(app):
     image.loadImages(app)
+    sounds.allSounds(app)
     app.clues_tofind=[app.candles,app.skull,app.clown,app.knife]
     app.sidePanel=False
     app.width=1300
@@ -369,7 +373,8 @@ def scare_redrawAll(app):
 
 def scare_onStep(app):
     checkTime(app)
-    if app.timePassed%90==0:
+    app.scream.play(restart=True)
+    if app.timePassed%120==0:
         app.maze[app.playerX][app.playerY]='c'
         setActiveScreen("maze")
     
@@ -392,8 +397,9 @@ def restart(app):
     doors.features(app)
     Room1.clues(app)
     Room2.clues(app)
-
-
+    sounds.allSounds(app)
+    
+    
 def main():
     runAppWithScreens(initialScreen='welcome')
 

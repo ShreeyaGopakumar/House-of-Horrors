@@ -42,14 +42,18 @@ def redrawAll(app):
 def click(mouseX,mouseY):
     if app.width//2-app.door1Width//2<=mouseX<=app.width//2+app.door1Width//2 and app.height//2-app.door1Height//2<=mouseY<=app.height//2+app.door2Height:
         app.MdoorOpen=not app.MdoorOpen
+        if app.MdoorOpen:
+            app.scream.play(restart=True)
     if app.width//2-app.door1Width-45-app.door1Width//2<=mouseX<=app.width//2-app.door1Width-60+app.door1Width//2 and app.height//2-app.door1Height//2<=mouseY<=app.height//2+app.door1Height//2:
         app.LdoorOpen=not app.LdoorOpen 
+        if app.LdoorOpen:
+            app.scream.play(restart=True)
     
     if app.width//2+app.door1Width+60-app.door1Width//2<=mouseX<=app.width//2+app.door1Width+60+app.door1Width//2 and app.height//2-app.door1Height//2<=mouseY<=app.height//2+app.door1Height//2:
         if app.RdoorOpen:
             app.flag+=1
         else:
             app.RdoorOpen=True
-    
+   
 
 

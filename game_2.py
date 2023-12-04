@@ -57,6 +57,7 @@ def onKeyPress(app,key):
             for (x,y) in app.platforms:
                 if app.playerY3-30==y and x-25<=app.playerX3<=x+25:
                     app.playerIsFalling=True
+            app.jump.play(restart=True)
             app.playerIsJumping=True
             app.playerdy=-10
 

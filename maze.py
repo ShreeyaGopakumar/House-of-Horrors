@@ -279,6 +279,8 @@ def change(app,dx,dy):
         character=app.maze[app.playerX+dx][app.playerY+dy]
         app.playerY+=dy
         app.playerX+=dx
+        if character in "1234":
+            app.doorSound.play(restart=True)
         return app.names[character]
     elif app.maze[app.playerX+dx][app.playerY+dy]=='p' and set(app.clues_tofind)==set(app.clues):
         app.playerY+=dy

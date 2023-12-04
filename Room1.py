@@ -27,6 +27,7 @@ def click(mouseX,mouseY):
     if app.clock:
         if 1090<=mouseX<=1275 and 110<=mouseY<=app.height//2+10:
             app.drawerOpen=True
+            
     if 250-15<=mouseX<=250+15 and 600-25<=mouseY<=600+25 and app.candles not in app.clues and app.clock:
         app.clues.append(app.candles)
     
