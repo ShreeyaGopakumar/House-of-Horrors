@@ -8,10 +8,10 @@ def loadSound(relativePath):
     return Sound(url)
 
 def allSounds(app):
-    app.music = loadSound("horrormusic.mp3")
-    app.scream=loadSound("scream.mp3")
-    app.doorSound=loadSound("doorSound.mp3")
-    app.jump=loadSound("jump.mp3")
+    app.music = loadSound("sound/horrormusic.mp3")
+    app.scream=loadSound("sound/scream.mp3")
+    app.doorSound=loadSound("sound/doorSound.mp3")
+    app.jump=loadSound("sound/jump.mp3")
     app.music.play(restart = True)
     
 ''''
