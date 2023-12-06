@@ -275,13 +275,15 @@ def change(app,dx,dy):
     if app.maze[app.playerX+dx][app.playerY+dy]=='c' or app.maze[app.playerX+dx][app.playerY+dy]=='v':
         app.playerY+=dy
         app.playerX+=dx
+
     elif app.maze[app.playerX+dx][app.playerY+dy] in "1234f":
         character=app.maze[app.playerX+dx][app.playerY+dy]
         app.playerY+=dy
         app.playerX+=dx
         if character in "1234":
             app.doorSound.play(restart=True)
-        return app.names[character]
+        return app.names[character]#takes room from dictionary and returns it 
+    
     elif app.maze[app.playerX+dx][app.playerY+dy]=='p' and set(app.clues_tofind)==set(app.clues):
         app.playerY+=dy
         app.playerX+=dx

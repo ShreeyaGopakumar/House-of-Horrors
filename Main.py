@@ -19,18 +19,22 @@ def drawSidePanel(app):
         drawRect(0,0,150,app.height,fill='black',border="white")
         drawRect(150,app.height//2,25,100,align='center',fill='white')
         crossed_distance=0
+        
         for x in range(len(app.clues_tofind)):
             if app.clues_tofind[x] in app.clues:
+                #controls how clues that have already been found appear
                 drawImage(app.clues_tofind[x],150/2-20,crossed_distance+20,width=60,height=100)
                 drawImage(app.tick,150/2-20,crossed_distance+40,width=20,height=20,align='center')
             else:    
                 drawImage(app.clues_tofind[x],150/2-20,crossed_distance+20,width=60,height=100,opacity=50)
             crossed_distance+=125
+        
         timer = datetime.timedelta(seconds = app.totalSeconds)
         drawLabel(timer,150/2+10,app.height-100,fill='white',bold=True,size=20)
         
 
 def sidePanelClick(app,mouseX,mouseY):
+    
     if  distance(mouseX,mouseY,50,40)<=30 and app.sidePanel==False:
         app.sidePanel=True
     if app.sidePanel:
@@ -38,13 +42,13 @@ def sidePanelClick(app,mouseX,mouseY):
             app.sidePanel=False
 
 def drawOptions(app):
+    
     drawCircle(40,40,30,fill='black',border='white')
     drawLabel("CLUES",40,40,fill='white',font='monospace')
-  
-
 
 #_______________________________________________________________________________  
 
+#welcome screen
 def welcome_onAppStart(app):
     image.loadImages(app)
     sounds.allSounds(app)
@@ -75,13 +79,14 @@ def inBegin(app,mouseX,mouseY):
 def welcome_onMousePress(app,mouseX,mouseY):
     if inBegin(app,mouseX,mouseY):
         setActiveScreen('introScreen')
+
 def welcome_onKeyPress(app,key):
     if key=='enter':
         setActiveScreen('introScreen')
 
-
 #_______________________________________________________________________________
 
+#backstory screen 
 def introScreen_redrawAll(app):
     drawImage(app.intro,0,0,width=app.introWidth,height=app.introHeight)
     drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
@@ -94,9 +99,9 @@ def introScreen_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
         setActiveScreen('instructions')
 
-
 #_______________________________________________________________________________
 
+#instructions screen
 def instructions_redrawAll(app):
     
     drawImage(app.control,0,0,width=app.width,height=app.height)
@@ -105,11 +110,9 @@ def instructions_redrawAll(app):
 def instructions_onMousePress(app,mouseX,mouseY):
     if inArrow(app,mouseX,mouseY):
         setActiveScreen('maze')
-
-
-
 #_______________________________________________________________________________
 
+#corridor 1
 def corridor1_onAppStart(app):
     doors.features(app)
     
@@ -128,7 +131,9 @@ def corridor1_onMousePress(app,mouseX,mouseY):
 
 def corridor1_onStep(app):
     checkTime(app)
-#_______________________________________________
+#_______________________________________________________________________________
+
+#for room 1
 def room1_onAppStart(app):
     Room1.clues(app)
 
@@ -158,6 +163,7 @@ def room1_onStep(app):
     checkTime(app)
 #_______________________________________________________________________________
 
+#intro to room 2
 def room2_intro_redrawAll(app):
     drawImage(app.room2_intro,0,0,width=app.width,height=app.height)
     drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
@@ -178,6 +184,7 @@ def room2_intro_onStep(app):
 
 #_______________________________________________________________________________
 
+#for room 2
 def room2_onAppStart(app):
     Room2.clues(app)
 
@@ -190,6 +197,7 @@ def room2_redrawAll(app):
         drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
     if app.fiveMinute:
         drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)  
+
 def room2_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
     Room2.click(mouseX,mouseY)
@@ -207,6 +215,7 @@ def room2_onStep(app):
 
 #_______________________________________________________________________________
 
+#intro to room 3
 def room3_intro_redrawAll(app):
     drawImage(app.room3_intro,0,0,width=app.width,height=app.height)
     drawImage(app.arrow, app.width-65, app.height//2, width=app.arrowWidth//2,height=app.arrowHeight//2,align='center')
@@ -225,6 +234,7 @@ def room3_intro_onStep(app):
     checkTime(app)
 #_______________________________________________________________________________
 
+#for room 3
 def room3_onAppStart(app):
     game_3.Points.features(app)
 
@@ -259,6 +269,7 @@ def room3_onStep(app):
 
 #_______________________________________________________________________________
 
+#intro to room 4
 def room4_intro_redrawAll(app):
     drawImage(app.room4_intro,0,0,width=app.width,height=app.height)
     drawRect(app.width-65,app.height//2,app.arrowWidth//2,app.arrowHeight//2-10,fill='white',align='center')
@@ -268,7 +279,6 @@ def room4_intro_redrawAll(app):
     if app.fiveMinute:
         drawImage(app.timer,150/2-40,app.height-250,width=100,height=100)
     
-
 def room4_intro_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
     if inArrow(app,mouseX,mouseY):
@@ -277,11 +287,12 @@ def room4_intro_onMousePress(app,mouseX,mouseY):
 def room4_intro_onStep(app):
     checkTime(app)
 #_______________________________________________________________________________
+
+#for room 4
 def room4_onAppStart(app):
     game_2.features(app)
 
 def room4_redrawAll(app):
-    
     game_2.redrawAll(app)
     drawOptions(app)
     drawSidePanel(app)
@@ -313,6 +324,7 @@ def room4_onStep(app):
 
 #_______________________________________________________________________________
 
+#for maze genearation and navigation
 def maze_onAppStart(app):
     maze.features(app)
 
@@ -326,14 +338,18 @@ def maze_redrawAll(app):
 
 def maze_onMousePress(app,mouseX,mouseY):
     sidePanelClick(app,mouseX,mouseY)
+
 def maze_onKeyPress(app,key):
     room=maze.onKeyPress(app,key)
     if room!=None:
         setActiveScreen(room)  
+
 def maze_onStep(app):
     checkTime(app)
     
-#______________________________________________
+#_______________________________________________________________________________
+
+#Update timer
 def checkTime(app):
     app.timePassed+=1
     if app.timePassed%30==0:
@@ -344,19 +360,19 @@ def checkTime(app):
                 app.fiveMinute=True
             app.totalSeconds-=1
 
-#_______________________________________________
+#_______________________________________________________________________________
 
+#for game won screen
 def over_redrawAll(app):
     drawImage(app.over,0,0,width=app.width,height=app.height)
 
-    
 def over_onMousePress(app,mouseX,mouseY):
     if app.width//2-155<=mouseX<=app.width//2+155 and app.height//2+140<=mouseY<=app.height//2+210:
         restart(app)
-        setActiveScreen("welcome")
-    
-#________________________________________________
+        setActiveScreen("welcome")    
+#_______________________________________________________________________________
 
+#for game lost screen
 def gameLost_redrawAll(app):
     drawImage(app.lost,0,0,width=app.width,height=app.height)
 
@@ -365,8 +381,9 @@ def gameLost_onMousePress(app,mouseX,mouseY):
     if app.width//2-155<=mouseX<=app.width//2+155 and app.height//2+140<=mouseY<=app.height//2+210:
         restart(app)
         setActiveScreen("welcome")
-#___________________________________________________
+#_______________________________________________________________________________
 
+#for jumpscare screen
 def scare_redrawAll(app):
     drawRect(0,0,app.width,app.height)
     drawImage(app.jumpscare,app.width//2,app.height//2,width=app.width-200,height=app.height,align='center')
@@ -378,6 +395,7 @@ def scare_onStep(app):
         app.maze[app.playerX][app.playerY]='c'
         setActiveScreen("maze")
     
+#_______________________________________________________________________________
 
 def restart(app):
     maze.features(app)

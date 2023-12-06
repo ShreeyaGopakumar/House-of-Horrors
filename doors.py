@@ -3,9 +3,9 @@ from cmu_graphics import *
 def features(app):
     app.sidePanel=False
     app.foundCandle=False
-    app.MdoorOpen=False
-    app.LdoorOpen=False
-    app.RdoorOpen=False
+    app.MdoorOpen=False#middle door
+    app.LdoorOpen=False#left door
+    app.RdoorOpen=False#right door
     app.flag=1
 
 def redrawAll(app):
@@ -38,12 +38,12 @@ def redrawAll(app):
         drawImage(app.door2,app.width//2+app.door1Width+60,app.height//2+15,width=app.door2Width,height=app.door2Height,align='center')
     drawRect(0,app.height//2+app.door1Height//2-10,app.width,app.height-app.height//2-app.door1Height//2,fill='black')
 
-    
 def click(mouseX,mouseY):
     if app.width//2-app.door1Width//2<=mouseX<=app.width//2+app.door1Width//2 and app.height//2-app.door1Height//2<=mouseY<=app.height//2+app.door2Height:
         app.MdoorOpen=not app.MdoorOpen
         if app.MdoorOpen:
             app.scream.play(restart=True)
+    
     if app.width//2-app.door1Width-45-app.door1Width//2<=mouseX<=app.width//2-app.door1Width-60+app.door1Width//2 and app.height//2-app.door1Height//2<=mouseY<=app.height//2+app.door1Height//2:
         app.LdoorOpen=not app.LdoorOpen 
         if app.LdoorOpen:

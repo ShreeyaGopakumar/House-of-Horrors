@@ -1,4 +1,5 @@
 from cmu_graphics import*
+#collision game
 class Points:
 
     def __init__(self,points):

@@ -1,4 +1,5 @@
 from cmu_graphics import*
+#platform game
 def features(app):
     app.gameOver4=False
     app.playerX3=app.width//2

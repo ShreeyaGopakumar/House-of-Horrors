@@ -1,4 +1,5 @@
 from cmu_graphics import *
+#room to find candle
 def clues(app):
     app.drawerOpen=False
     app.blockPuzzle=False
